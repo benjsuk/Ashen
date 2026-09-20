@@ -10,7 +10,8 @@
     "typescript": "^7"
   },
   "scripts": {
-    "start": "bun run index.ts"
+    "start": "bun run index.ts",
+    "dev": "bun run index.ts --dev"
   },
   "dependencies": {
     "uuid": "^14.0.2"
