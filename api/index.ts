@@ -26,10 +26,10 @@ try {
 
   console.log(transactions);
 } finally {
-  try{
-  await $`cd db_server/ && sudo docker compose down`.quiet();
-  }catch(e){
-    console.log(e)
-    console.log("DB Server May Not Have Closed")
+  try {
+    await $`cd db_server/ && sudo docker compose down`.quiet();
+  } catch (e) {
+    console.log(e);
+    console.log("DB Server May Not Have Closed");
   }
 }
