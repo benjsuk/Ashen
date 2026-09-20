@@ -1,4 +1,4 @@
-import { v7 as uuid } from "uuid";
+import { v7 as uuid, NIL as nil } from "uuid";
 
 type Transaction = {
   id: string; // PK
@@ -6,6 +6,7 @@ type Transaction = {
   description: string;
   date: Date;
   category?: string;
+  user: string;
 };
 
 function newTransaction(
@@ -13,8 +14,10 @@ function newTransaction(
   description: string,
   date: Date,
   category?: string,
+  user?: string
 ) {
-  return <Transaction>{ id: uuid(), amount, description, date, category };
+  if (!user) user = nil;
+  return <Transaction>{ id: uuid(), amount, description, date, category, user };
 }
 
 function getTransactions() {}
