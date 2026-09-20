@@ -1,17 +1,13 @@
 type Transaction = {
-    amount: number,
-    description: string,
-    date: Date,
-    category?: string,
-}
+  amount: number;
+  description: string;
+  date: Date;
+  category?: string;
+};
 
-function getTransactions(){
+function getTransactions() {}
 
-}
+function addTransaction(transaction: Transaction) {}
 
-function addTransaction(transaction: Transaction){
-
-}
-
-export type {Transaction}
-export {getTransactions, addTransaction}
+export type { Transaction };
+export { getTransactions, addTransaction };
