@@ -1,7 +1,7 @@
 import logger from "node-color-log";
 import type { Transaction } from "./transactions";
 import { newTransaction } from "./transactions";
-import { $ } from "bun";
+import { $, env, sql, SQL } from "bun";
 import "node-color-log";
 
 try {
@@ -12,9 +12,18 @@ try {
 }
 
 try {
+  const mysql = new SQL(`mysql://ashen:${process.env.MYSQL_ROOT_PASSWORD}@localhost:5905/mydb`);
+  const mysqlResults = await mysql`
+  USE ashen;
+  LIST TABLES;
+`;
+logger.debug(mysqlResults)
+
   let transactions: Array<Transaction> = [
     newTransaction(350, "Bacon", new Date("2026-09-01"), "food"),
   ];
+
+
 
   let daysTotal: Dict<number> = {};
   transactions.forEach((transaction: Transaction) => {
@@ -32,6 +41,6 @@ try {
     await $`cd db_server/ && sudo docker compose down`.quiet();
   } catch (e) {
     logger.error(e);
-    logger.error("DB Server May Not Have Closed");
+    logger.error("DB Server May Not Have Closed!");
   }
 }

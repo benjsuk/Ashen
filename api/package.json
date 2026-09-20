@@ -10,7 +10,7 @@
     "typescript": "^7"
   },
   "scripts": {
-    "start": "bun run index.ts",
+    "start": "bun run index.ts --env-file='db_server/.db.env'",
     "dev": "bun run index.ts --dev"
   },
   "dependencies": {
