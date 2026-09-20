@@ -14,7 +14,7 @@ function newTransaction(
   description: string,
   date: Date,
   category?: string,
-  user?: string
+  user?: string,
 ) {
   if (!user) user = nil;
   return <Transaction>{ id: uuid(), amount, description, date, category, user };
