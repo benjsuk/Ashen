@@ -1,7 +1,7 @@
 import { v7 as uuid } from "uuid";
 
 type Transaction = {
-  id: string;
+  id: string; // PK
   amount: number;
   description: string;
   date: Date;
