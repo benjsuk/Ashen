@@ -1,12 +1,13 @@
 import logger from "node-color-log";
 import type { Transaction } from "./transactions";
 import { newTransaction } from "./transactions";
+import {startDB,stopDB,callDB } from "./db";
 import { $, env, sql, SQL } from "bun";
 import "node-color-log";
 
 try {
   logger.color("black").debug("Starting DB Server...");
-  await $`cd db_server/ && sudo docker compose up -d --wait`.quiet();
+  await startDB()
 } catch (e) {
   logger.error(e);
   process.exit();
@@ -15,12 +16,8 @@ try {
 try {
   logger.color("black").debug("DB Server Started.");
   logger.color("black").debug("Connecting to DB...");
-  const mysql = new SQL(
-    `mysql://root:${process.env.MYSQL_ROOT_PASSWORD}@127.0.0.1:5905/ashen`,
-  );
-  const mysqlResults = await mysql`
-  SHOW TABLES;
-`;
+  
+  const mysqlResults = await callDB(`SHOW TABLES;`);
   logger.color("black").debug(mysqlResults);
 
   let transactions: Array<Transaction> = [
@@ -41,7 +38,7 @@ try {
 } finally {
   try {
     logger.color("black").debug("Stopping DB Server...");
-    await $`cd db_server/ && sudo docker compose down`.quiet();
+    await stopDB();
     logger.color("black").debug("DB Server Stopped.");
   } catch (e) {
     logger.error(e);
