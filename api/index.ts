@@ -1,13 +1,13 @@
 import logger from "node-color-log";
 import type { Transaction } from "./transactions";
 import { newTransaction } from "./transactions";
-import {startDB,stopDB,callDB } from "./db";
+import { startDB, stopDB, callDB } from "./db";
 import { $, env, sql, SQL } from "bun";
 import "node-color-log";
 
 try {
   logger.color("black").debug("Starting DB Server...");
-  await startDB()
+  await startDB();
 } catch (e) {
   logger.error(e);
   process.exit();
@@ -16,7 +16,7 @@ try {
 try {
   logger.color("black").debug("DB Server Started.");
   logger.color("black").debug("Connecting to DB...");
-  
+
   const mysqlResults = await callDB(`SHOW TABLES;`);
   logger.color("black").debug(mysqlResults);
 
