@@ -3,4 +3,4 @@ type Day = {
   balance: number;
 };
 
-export type {Day}
+export type { Day };

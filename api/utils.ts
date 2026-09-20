@@ -1,7 +1,7 @@
 class logger {
-    log(text:string) {
-        console.log(text)
-    }
+  log(text: string) {
+    console.log(text);
+  }
 }
 
-export {logger}
+export { logger };
