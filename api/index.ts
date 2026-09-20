@@ -12,18 +12,18 @@ try {
 }
 
 try {
-  const mysql = new SQL(`mysql://ashen:${process.env.MYSQL_ROOT_PASSWORD}@localhost:5905/mydb`);
+  const mysql = new SQL(
+    `mysql://ashen:${process.env.MYSQL_ROOT_PASSWORD}@localhost:5905/mydb`,
+  );
   const mysqlResults = await mysql`
   USE ashen;
   LIST TABLES;
 `;
-logger.debug(mysqlResults)
+  logger.debug(mysqlResults);
 
   let transactions: Array<Transaction> = [
     newTransaction(350, "Bacon", new Date("2026-09-01"), "food"),
   ];
-
-
 
   let daysTotal: Dict<number> = {};
   transactions.forEach((transaction: Transaction) => {
