@@ -31,7 +31,7 @@ try {
   try{
   await $`cd db_server/ && sudo docker compose down`.quiet();
   }catch(e){
-    logger.error(e)
-    logger.error("DB Server May Not Have Closed")
+    console.log(e)
+    console.log("DB Server May Not Have Closed")
   }
 }
