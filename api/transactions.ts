@@ -1,15 +1,20 @@
-import { v7 as uuid } from 'uuid';
+import { v7 as uuid } from "uuid";
 
 type Transaction = {
-    id: string;
+  id: string;
   amount: number;
   description: string;
   date: Date;
   category?: string;
 };
 
-function newTransaction(amount:number,description:string,date:Date,category?:string){
-    return<Transaction> {id:uuid(),amount,description,date,category}
+function newTransaction(
+  amount: number,
+  description: string,
+  date: Date,
+  category?: string,
+) {
+  return <Transaction>{ id: uuid(), amount, description, date, category };
 }
 
 function getTransactions() {}

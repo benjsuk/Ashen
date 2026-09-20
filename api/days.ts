@@ -1,4 +1,3 @@
 type Day = {
-    date: Date, // PK
-
-}
+  date: Date; // PK
+};
