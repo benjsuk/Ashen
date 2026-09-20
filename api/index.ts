@@ -5,21 +5,22 @@ import { $, env, sql, SQL } from "bun";
 import "node-color-log";
 
 try {
-  await $`cd db_server/ && sudo docker compose up -d`.quiet();
+  logger.color('black').debug('Starting DB Server...')
+  await $`cd db_server/ && sudo docker compose up -d --wait`.quiet();
 } catch (e) {
   logger.error(e);
   process.exit();
 }
 
 try {
+  logger.color('black').debug('DB Server Started.')
   const mysql = new SQL(
-    `mysql://ashen:${process.env.MYSQL_ROOT_PASSWORD}@localhost:5905/mydb`,
+    `mysql://root:${process.env.MYSQL_ROOT_PASSWORD}@127.0.0.1:5905/ashen`,
   );
   const mysqlResults = await mysql`
-  USE ashen;
-  LIST TABLES;
+  SHOW TABLES;
 `;
-  logger.debug(mysqlResults);
+  logger.color('black').debug(mysqlResults);
 
   let transactions: Array<Transaction> = [
     newTransaction(350, "Bacon", new Date("2026-09-01"), "food"),
