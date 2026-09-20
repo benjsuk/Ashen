@@ -18,7 +18,7 @@ try {
   logger.color("black").debug("Connecting to DB...");
 
   const mysqlResults = await callDB(`SHOW TABLES;`);
-  logger.color("black").debug(mysqlResults);
+  logger.color("black").debug(mysqlResults[0]);
 
   let transactions: Array<Transaction> = [
     newTransaction(350, "Bacon", new Date("2026-09-01"), "food"),

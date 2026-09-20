@@ -1,8 +1,9 @@
 import { $, sql, SQL, env } from "bun";
 
-const mysql = new SQL(
-  `mysql://root:${process.env.MYSQL_ROOT_PASSWORD}@127.0.0.1:5905/ashen`,
-);
+const mysql = new SQL({
+  url: `mysql://root:${process.env.MYSQL_ROOT_PASSWORD}@127.0.0.1:5905/ashen`,
+  allowPublicKeyRetrieval: true,
+});
 
 async function startDB() {
   await $`cd db_server/ && sudo docker compose up -d --wait`.quiet();
