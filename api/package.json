@@ -11,5 +11,8 @@
   },
   "scripts": {
     "start": "bun run index.ts"
+  },
+  "dependencies": {
+    "uuid": "^14.0.2"
   }
 }

@@ -1,24 +1,8 @@
 import type { Transaction } from "./transactions";
+import {newTransaction} from "./transactions"
 
 let transactions: Array<Transaction> = [
-  {
-    amount: 350,
-    description: "bacon",
-    date: new Date("2026-09-01"),
-    category: "food",
-  },
-  {
-    amount: 799,
-    description: "KFC",
-    date: new Date("2026-09-01"),
-    category: "food",
-  },
-  {
-    amount: 4000,
-    description: "savings",
-    date: new Date("2026-09-02"),
-    category: "savings",
-  },
+    newTransaction(350, "Bacon", new Date("2026-09-01"), "food")
 ];
 
 let daysTotal: Dict<number> = {};
@@ -30,3 +14,5 @@ transactions.forEach((transaction: Transaction) => {
 Object.entries(daysTotal).forEach(([day, total]) => {
   console.log(`On ${day}, £${(total || 0) / 100} was spent.`);
 });
+
+console.log(transactions)

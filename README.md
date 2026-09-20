@@ -17,7 +17,7 @@ Budget, Schedule, Plan
 - [ ] Projections
 - [ ] API
 
-## Planned Platform
+## Planned Platforms
 
 - [ ] Windows
 - [ ] Web
