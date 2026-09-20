@@ -19,7 +19,7 @@ function newTransaction(
 
 function getTransactions() {}
 
-function addTransaction(transaction: Transaction) {}
+function logTransaction(transaction: Transaction) {}
 
 export type { Transaction };
-export { getTransactions, addTransaction, newTransaction };
+export { getTransactions, logTransaction, newTransaction };
