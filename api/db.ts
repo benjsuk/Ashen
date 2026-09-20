@@ -1,7 +1,7 @@
-import { $, sql, SQL, env } from "bun";
+import { $, SQL } from "bun";
 
 const mysql = new SQL({
-  url: `mysql://root:${process.env.MYSQL_ROOT_PASSWORD}@127.0.0.1:5905/ashen`,
+  url: `mysql://root:${process.env.MYSQL_ROOT_PASSWORD}@127.0.0.1:${process.env.MYSQL_PORT}/ashen`,
   allowPublicKeyRetrieval: true,
 });
 

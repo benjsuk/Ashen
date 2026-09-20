@@ -2,7 +2,6 @@ import logger from "node-color-log";
 import type { Transaction } from "./transactions";
 import { newTransaction } from "./transactions";
 import { startDB, stopDB, callDB } from "./db";
-import { $, env, sql, SQL } from "bun";
 import "node-color-log";
 
 try {
