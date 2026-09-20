@@ -10,6 +10,9 @@ Budget, Schedule, Plan
 - [x] _Transactions_
   - [x] Categories
   - [x] Date
+- [ ] Database
+  - [ ] Schema
+  - [ ] Access Functions
 - [ ] _Balance_
   - [ ] Graph
 - [ ] Diff
