@@ -8,6 +8,8 @@ type Transaction = {
   category?: string;
 };
 
+
+
 function newTransaction(
   amount: number,
   description: string,
