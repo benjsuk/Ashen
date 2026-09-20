@@ -5,7 +5,7 @@ import { $, env, sql, SQL } from "bun";
 import "node-color-log";
 
 try {
-  logger.color('black').debug('Starting DB Server...')
+  logger.color("black").debug("Starting DB Server...");
   await $`cd db_server/ && sudo docker compose up -d --wait`.quiet();
 } catch (e) {
   logger.error(e);
@@ -13,14 +13,14 @@ try {
 }
 
 try {
-  logger.color('black').debug('DB Server Started.')
+  logger.color("black").debug("DB Server Started.");
   const mysql = new SQL(
     `mysql://root:${process.env.MYSQL_ROOT_PASSWORD}@127.0.0.1:5905/ashen`,
   );
   const mysqlResults = await mysql`
   SHOW TABLES;
 `;
-  logger.color('black').debug(mysqlResults);
+  logger.color("black").debug(mysqlResults);
 
   let transactions: Array<Transaction> = [
     newTransaction(350, "Bacon", new Date("2026-09-01"), "food"),
