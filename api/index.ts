@@ -13,8 +13,8 @@ try {
 }
 
 try {
-  logger.color('black').debug('DB Server Started.')
-   logger.color('black').debug('Connecting to DB...')
+  logger.color("black").debug("DB Server Started.");
+  logger.color("black").debug("Connecting to DB...");
   const mysql = new SQL(
     `mysql://root:${process.env.MYSQL_ROOT_PASSWORD}@127.0.0.1:5905/ashen`,
   );
@@ -40,9 +40,9 @@ try {
   logger.color("black").debug(transactions);
 } finally {
   try {
-     logger.color('black').debug('Stopping DB Server...')
+    logger.color("black").debug("Stopping DB Server...");
     await $`cd db_server/ && sudo docker compose down`.quiet();
-     logger.color('black').debug('DB Server Stopped.')
+    logger.color("black").debug("DB Server Stopped.");
   } catch (e) {
     logger.error(e);
     logger.error("DB Server May Not Have Closed!");
