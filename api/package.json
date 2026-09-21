@@ -10,11 +10,10 @@
     "typescript": "^7"
   },
   "scripts": {
-    "start": "bun run --env-file='db_server/.db.env' index.ts ",
+    "start": "bun run --env-file='db_server/.db.env' --env-file='.env' index.ts ",
     "dev": "bun run index.ts --dev"
   },
   "dependencies": {
-    "node-color-log": "^14.0.0",
     "uuid": "^14.0.2"
   },
   "version": "0.0.1-proto"
