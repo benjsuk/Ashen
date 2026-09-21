@@ -1,22 +1,7 @@
-# Database Schema
-Schema as of v0.1.0-alpha
-
-## Tables
-
-- Users
-- Days
-- Transactions
-
-### Users
-```sql
 CREATE TABLE users(
     userID varchar(36) PRIMARY KEY,
     name varchar(255) NOT NULL
 );
-```
-
-### Days
-```sql
 CREATE TABLE days(
     date DATE NOT NULL,
     userID varchar(36) NOT NULL,
@@ -25,10 +10,6 @@ CREATE TABLE days(
     CONSTRAINT fk_days_user
         FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
 );
-```
-
-### Transactions
-```sql
 CREATE TABLE transactions(
     transactionID varchar(36) PRIMARY KEY,
     amount INT NOT NULL,
@@ -40,4 +21,5 @@ CREATE TABLE transactions(
         FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE,
     INDEX idx_transactions_date (date)
 );
-```
+
+INSERT INTO users (userID, name) VALUES ('00000000-0000-0000-0000-000000000000', 'Admin');

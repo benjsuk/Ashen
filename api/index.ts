@@ -1,5 +1,5 @@
 import { utils } from "./utils";
-import { startDB, stopDB } from "./db";
+import { callDB, startDB, stopDB } from "./db";
 
 const util = new utils();
 const PORT = Number(process.env.PORT ?? 3000);
@@ -18,6 +18,7 @@ const server = Bun.serve({
   port: PORT,
   routes: {
     "/status": new Response("OK"),
+    "/list-tables": new Response(JSON.stringify(await callDB("show tables"))),
   },
   fetch() {
     return new Response("Not Found", { status: 404 });
