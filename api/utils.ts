@@ -12,7 +12,6 @@ class utils {
     );
   }
   log(input: any) {
-    if (!config.debugMode) return;
     console.log(
       new Date().toISOString().split("Z")[0]?.replace("T", " "),
       Bun.color("grey", "ansi-256") +

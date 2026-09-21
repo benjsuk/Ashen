@@ -1,4 +1,6 @@
 import { $, SQL } from "bun";
+import { utils } from "./utils";
+const util = new utils;
 
 const mysql = new SQL({
   url: `mysql://root:${process.env.MYSQL_ROOT_PASSWORD}@127.0.0.1:${process.env.MYSQL_PORT}/ashen`,
@@ -14,7 +16,10 @@ async function stopDB() {
 }
 
 async function callDB(statement: string) {
-  return await mysql.unsafe(statement);
+  const startTime = new Date().getTime();
+  const result = await mysql.unsafe(statement);
+  const endTime = new Date().getTime();
+  return [result, (endTime-startTime)];
 }
 
 export { startDB, stopDB, callDB };
