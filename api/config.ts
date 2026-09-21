@@ -1,5 +1,5 @@
 class config {
-    static debugMode = true;
+  static debugMode = true;
 }
 
-export {config}
+export { config };
