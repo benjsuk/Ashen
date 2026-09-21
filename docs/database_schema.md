@@ -1,4 +1,5 @@
 # Database Schema
+
 Schema as of v0.1.0-alpha
 
 ## Tables
@@ -8,6 +9,7 @@ Schema as of v0.1.0-alpha
 - Transactions
 
 ### Users
+
 ```sql
 CREATE TABLE users(
     userID varchar(36) PRIMARY KEY,
@@ -16,6 +18,7 @@ CREATE TABLE users(
 ```
 
 ### Days
+
 ```sql
 CREATE TABLE days(
     date DATE NOT NULL,
@@ -28,6 +31,7 @@ CREATE TABLE days(
 ```
 
 ### Transactions
+
 ```sql
 CREATE TABLE transactions(
     transactionID varchar(36) PRIMARY KEY,
