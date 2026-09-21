@@ -25,8 +25,7 @@ class utils {
     console.error(
       (Bun.color("red", "ansi-256") || "") +
         new Date().toISOString().split("Z")[0]?.replace("T", " "),
-      "[ERROR]" + 
-      Bun.color("black", "ansi-256"),
+      "[ERROR]" + Bun.color("black", "ansi-256"),
       input,
     );
   }

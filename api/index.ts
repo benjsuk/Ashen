@@ -30,7 +30,7 @@ let shuttingDown = false;
 async function shutdown(signal: string) {
   if (shuttingDown) return;
   shuttingDown = true;
-  console.log("")
+  console.log("");
   util.debug(`Received ${signal}, shutting down...`);
   server.stop(true);
 
