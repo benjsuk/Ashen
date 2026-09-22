@@ -38,11 +38,11 @@ const server = Bun.serve({
   port: PORT,
   routes: {
     "/status": async () => {
-      return await statusRouter.GET()
-    }, 
+      return await statusRouter.GET();
+    },
     "/day": {
       GET: async (req) => {
-        return await dayRouter.GET(req)
+        return await dayRouter.GET(req);
       },
       OPTIONS: async () => {
         return await dayRouter.OPTIONS();

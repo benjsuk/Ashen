@@ -36,7 +36,9 @@ class Day {
       headers: config.defaultHeaders,
     });
   }
-  async OPTIONS() { return  new Response(null, { headers: config.defaultHeaders })}
+  async OPTIONS() {
+    return new Response(null, { headers: config.defaultHeaders });
+  }
   async POST() {}
 }
 
