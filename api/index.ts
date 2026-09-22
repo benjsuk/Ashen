@@ -50,6 +50,9 @@ const server = Bun.serve({
       );
       return new Response(JSON.stringify(dbResult[0]));
     },
+    "/transactions": async () => {
+      return new Response()
+    },
     /*"/test-transaction": async () => {
  util.debug("Received /test-transaction GET; Calling DB");
  util.debug("Getting Transactions...")
