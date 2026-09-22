@@ -70,21 +70,21 @@ const server = Bun.serve({
         }
         var result = 0;
         const dbResult = (await getTransactionsByDay(new Date()))[0] || "NONE";
-        if (dbResult.length > 0){
+        if (dbResult.length > 0) {
           for (let i = 0; i < dbResult.length; i++) {
-            if (dbResult[i].direction == "income"){
-            result += dbResult[i].amount}
-else {
-  result -= dbResult[i].amount
-}
+            if (dbResult[i].direction == "income") {
+              result += dbResult[i].amount;
+            } else {
+              result -= dbResult[i].amount;
+            }
           }
         } else {
           return new Response("No Data Found", {
             status: 204,
-            headers: defaultHeaders
-          })
+            headers: defaultHeaders,
+          });
         }
-        return Response.json((result), {
+        return Response.json(result, {
           headers: defaultHeaders,
         });
       },
