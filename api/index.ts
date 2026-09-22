@@ -50,15 +50,45 @@ const server = Bun.serve({
       );
       return new Response(JSON.stringify(dbResult[0]));
     },
-    "/transactions": async () => {
-      return new Response();
+    "/transactions": {
+      GET: async (req) => {
+        const headers = req.headers;
+        const authToken = headers.get("authentication")?.split("Bearer ")[1];
+        if (authToken != "LSXRqq") {
+          return new Response(null, {
+            status: 401,
+            statusText: "Access Denied",
+          });
+        }
+        const dbResult = (await getTransactions()) || "NONE";
+        return Response.json(JSON.parse(JSON.stringify(dbResult[0])));
+      },
+      POST: async (req) => {
+        const headers = req.headers;
+        const authToken = headers.get("authentication")?.split("Bearer ")[1];
+        if (authToken != "LSXRqq") {
+          return new Response(null, {
+            status: 401,
+            statusText: "Access Denied",
+          });
+        }
+        try {
+          let request: any = await req.json();
+          request = JSON.parse(JSON.stringify(request));
+          const inTransaction = newTransaction(
+            request.amount,
+            request.description,
+            new Date(request.date),
+            request.category || null,
+            request.user || null,
+          );
+          await logTransaction(inTransaction);
+        } catch (e) {
+          return new Response("Error: " + e, { status: 500 });
+        }
+        return new Response("Completed");
+      },
     },
-    /*"/test-transaction": async () => {
- util.debug("Received /test-transaction GET; Calling DB");
- util.debug("Getting Transactions...")
- const dbResult = (await getTransaction("01a0c674-397c-73d1-ae27-1f855a112f93") || "NONE")
- return Response.json(JSON.parse(JSON.stringify(dbResult[0])));
- },*/
   },
   fetch() {
     return new Response("Not Found", { status: 404 });

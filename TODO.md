@@ -39,7 +39,7 @@ The app can read and write real transaction data.
 - [x] Parameterized queries in `db.ts` (replace `mysql.unsafe()` string SQL)
 - [x] Implement `logTransaction`, INSERT into `transactions`
 - [x] Implement `getTransactions`, SELECT scoped by `userID`
-- [ ] Routes: `POST /transactions`, `GET /transactions`
+- [x] Routes: `POST /transactions`, `GET /transactions`
 - [ ] Request validation + proper 4xx/5xx responses
 - [ ] Tick README: `Database → Schema`, `Database → Access Functions`, `API`
 - [ ] Release: changelog + tag `v0.1.0-beta`

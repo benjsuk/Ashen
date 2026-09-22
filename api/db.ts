@@ -15,6 +15,12 @@ async function stopDB() {
   await $`cd db_server/ && sudo docker compose down`.quiet();
 }
 
+async function resetDB(){
+  await stopDB();
+  await $`rm -rf db_server/db_data`.quiet();
+  await startDB();
+}
+
 async function callDB(statement: string, params?: any, values?: boolean) {
   const startTime = new Date().getTime();
   var result;
@@ -27,4 +33,4 @@ async function callDB(statement: string, params?: any, values?: boolean) {
   return [result, endTime - startTime];
 }
 
-export { startDB, stopDB, callDB };
+export { startDB, stopDB, callDB, resetDB };
