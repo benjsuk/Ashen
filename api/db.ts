@@ -15,7 +15,7 @@ async function stopDB() {
   await $`cd db_server/ && sudo docker compose down`.quiet();
 }
 
-async function resetDB(){
+async function resetDB() {
   await stopDB();
   await $`rm -rf db_server/db_data`.quiet();
   await startDB();
