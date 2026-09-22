@@ -15,14 +15,14 @@ async function getDay(date?: Date, user?: string) {
       date.toISOString().split("T")[0],
     ]);
     const totals = getTransactionsByDay(date);
-    return [day, totals]
+    return [day, totals];
   } else {
     const day = await callDB(
       "SELECT * FROM days WHERE date = ? AND userID = ?",
       [date.toISOString().split("T")[0], user],
     );
     const totals = getTransactionsByDay(date, user);
-    return [day, totals]
+    return [day, totals];
   }
 }
 
