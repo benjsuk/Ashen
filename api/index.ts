@@ -91,7 +91,8 @@ const server = Bun.serve({
             !request.amount ||
             !request.description ||
             !request.date ||
-            !((request.amount as number) > 0)
+            !((request.amount as number) > 0) ||
+            !(!request.direction || request.direction == "expense" || request.direction == "income")
           ) {
             return new Response("Transaction not in correct format.", {
               status: 400,
@@ -104,6 +105,7 @@ const server = Bun.serve({
             new Date(request.date),
             request.category || null,
             request.user || null,
+            request.direction || null
           );
           await logTransaction(inTransaction);
         } catch (e) {
@@ -126,6 +128,7 @@ const server = Bun.serve({
 endTime = new Date().getTime();
 util.debug("Bun Server Started. (" + (endTime - startTime).toString() + "ms)");
 util.log(`API online at ${server.url}`);
+util.log("Press Ctrl+C to terminate.");
 
 let shuttingDown = false;
 async function shutdown(signal: string) {

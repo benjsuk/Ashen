@@ -6,18 +6,18 @@ Ashen development roadmap, chronological. Work top-to-bottom.
 
 - Exactly **one** task in progress at a time, the first unticked task below your current position is the next thing.
 - Tick `[x]` when done; keep `[ ]` for everything not started. This file is meant to be edited freely.
-- Milestone complete = every task ticked → update `CHANGELOG.md`, bump `package.json` version, git-tag `vX.Y.Z`, then move to the next milestone.
+- Milestone complete = every task ticked -> update `CHANGELOG.md`, bump `package.json` version, git-tag `vX.Y.Z`, then move to the next milestone.
 - Near-term milestones are concrete; far-future items are deliberately vague, break them down when they get close.
 
 ## Ground rules (never violated)
 
-- All money is integer **pence**.
+- All money is integer **pence**. All money is either income or expense.
 - Dates are day-granularity (`DATE`).
 - Every query is scoped by `userID`, user data stays segmented, always.
 
 ---
 
-## M0 - Skeleton ✅ `v0.0.1-proto`
+## M0 - Skeleton -> `v0.0.1-proto`
 
 - [x] Thin `index.ts` entrypoint (Bun HTTP server)
 - [x] `/status` route
@@ -25,14 +25,14 @@ Ashen development roadmap, chronological. Work top-to-bottom.
 - [x] Docker compose DB start/stop in `db.ts`
 - [x] `CHANGELOG.md` started
 
-## M1 - Database schema ✅ `v0.1.0-alpha`
+## M1 - Database schema -> `v0.1.0-alpha`
 
 - [x] `docs/database_schema.md`, Users, Days, Transactions
 - [x] `db_server/init.sql`, FKs + composite `(date, userID)` key on days
 - [x] Seed dev user
 - [x] Tag `v0.1.0-alpha`
 
-## M2 - Access functions & transactions round-trip → `v0.1.0-beta`
+## M2 - Access functions & transactions round-trip -> `v0.1.0`
 
 The app can read and write real transaction data.
 
@@ -41,37 +41,35 @@ The app can read and write real transaction data.
 - [x] Implement `getTransactions`, SELECT scoped by `userID`
 - [x] Routes: `POST /transactions`, `GET /transactions`
 - [x] Request validation + proper 4xx/5xx responses
-- [x] Tick README: `Database → Schema`, `Database → Access Functions`
+- [x] Tick README: `Database -> Schema`, `Database -> Access Functions`
 - [x] Release: changelog + tag `v0.1.0`
 
-## M3 - Day & month totals → `v0.2.0`
+## M3 - Day & month totals -> `v0.2.0-proactive`
 
 Answer "how much did I spend when?", per user, by day, month, or transaction.
 
 - [ ] Compute per-day totals from `transactions` (group by date)
-- [ ] Refresh `days` balances (denormalized snapshot)
+- [ ] `POST /days`, adding balances to the days
 - [ ] `GET /days?from=&to=`, per-day totals for a user
 - [ ] `GET /months`, monthly aggregation
 - [ ] Release: changelog + tag `v0.2.0`
 
-## M4 - Authentication (Firebase) → `v0.2.0-alpha`
+## M4 - Authentication (Firebase)
 
 Every request identified; all data segmented by real users.
 
 - [ ] Set up Firebase project + initialize `firebase-admin`
-- [ ] Migrate schema: `userID` → `varchar(128)` (Firebase UID); drop dev-user seed
-- [ ] Auth middleware, verify bearer ID token → `uid`
+- [ ] Migrate schema: `userID` -> `varchar(128)` (Firebase UID); drop dev-user seed
+- [ ] Auth middleware, verify bearer ID token -> `uid`
 - [ ] Auto-provision `users` row on first login
 - [ ] Scope all routes by authenticated user
 - [ ] Local dev via Firebase Auth Emulator
-- [ ] Release: changelog + tag `v0.2.0-alpha`
 
-## M5 - Budget → `v0.2.0`
+## M5 - Budget
 
 - [ ] Budget schema (per-user, per-category, per-month limits)
 - [ ] Set/get budget routes
 - [ ] Actual vs budget comparison endpoint
-- [ ] Release: changelog + tag `v0.2.0`
 
 ## M6 - Balance graph data
 

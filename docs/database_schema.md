@@ -1,6 +1,6 @@
 # Database Schema
 
-Schema as of v0.1.0
+Schema as of v0.2.0-proactive
 
 ## Tables
 
@@ -40,6 +40,7 @@ CREATE TABLE transactions(
     date DATE NOT NULL,
     category varchar(128),
     userID varchar(36) NOT NULL,
+    direction ENUM('income', 'expense') NOT NULL DEFAULT 'expense',
     CONSTRAINT fk_transactions_user
         FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE,
     INDEX idx_transactions_date (date)
