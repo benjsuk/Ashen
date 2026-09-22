@@ -10,16 +10,15 @@ Budget, Schedule, Plan
 - [x] _Transactions_
   - [x] Categories
   - [x] Date
-- [ ] Database
-  - [ ] Schema
-  - [ ] Access Functions
+- [x] Database
+  - [x] Schema
+  - [x] Access Functions
 - [ ] _Balance_
   - [ ] Graph
 - [ ] Diff
 - [ ] Budget
 - [ ] Rota
 - [ ] Projections
-- [ ] API
 
 ## Planned Platforms
 

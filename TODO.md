@@ -40,9 +40,9 @@ The app can read and write real transaction data.
 - [x] Implement `logTransaction`, INSERT into `transactions`
 - [x] Implement `getTransactions`, SELECT scoped by `userID`
 - [x] Routes: `POST /transactions`, `GET /transactions`
-- [ ] Request validation + proper 4xx/5xx responses
-- [ ] Tick README: `Database → Schema`, `Database → Access Functions`, `API`
-- [ ] Release: changelog + tag `v0.1.0-beta`
+- [x] Request validation + proper 4xx/5xx responses
+- [x] Tick README: `Database → Schema`, `Database → Access Functions`
+- [x] Release: changelog + tag `v0.1.0-beta`
 
 ## M3 - Day & month totals → `v0.1.0`
 

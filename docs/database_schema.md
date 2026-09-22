@@ -1,6 +1,6 @@
 # Database Schema
 
-Schema as of v0.1.0-alpha
+Schema as of v0.1.0
 
 ## Tables
 

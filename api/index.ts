@@ -68,13 +68,15 @@ const server = Bun.serve({
         const authToken = headers.get("authentication")?.split("Bearer ")[1];
         if (authToken != "LSXRqq") {
           return new Response(null, {
-            status: 401,
-            statusText: "Access Denied",
+            status: 401
           });
         }
         try {
           let request: any = await req.json();
           request = JSON.parse(JSON.stringify(request));
+          if (!request.amount || !request.description || !request.date || !(request.amount as number > 0)){
+            return new Response("Transaction not in correct format.", {status: 400});
+          }
           const inTransaction = newTransaction(
             request.amount,
             request.description,
@@ -86,7 +88,7 @@ const server = Bun.serve({
         } catch (e) {
           return new Response("Error: " + e, { status: 500 });
         }
-        return new Response("Completed");
+        return new Response("Completed", {status: 201});
       },
     },
   },
