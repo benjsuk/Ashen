@@ -1,6 +1,5 @@
 import { $, SQL } from "bun";
-import { utils } from "./utils";
-const util = new utils();
+import { util } from "./utils";
 
 const mysql = new SQL({
   url: `mysql://root:${process.env.MYSQL_ROOT_PASSWORD}@127.0.0.1:${process.env.MYSQL_PORT}/ashen`,

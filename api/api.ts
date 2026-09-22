@@ -1,6 +1,6 @@
-import { utils } from "./utils";
+import { util } from "./scripts/utils";
 import { config } from "./config";
-import { callDB, startDB, stopDB } from "./db";
+import { callDB, startDB, stopDB } from "./scripts/db";
 import {
   getTransactions,
   logTransaction,
@@ -8,16 +8,14 @@ import {
   getTransaction,
   getTransactionsByDay,
   type Transaction,
-} from "./transactions";
+} from "./scripts/transactions";
 import { NIL } from "uuid";
+import { statusRouter } from "./routes/status.route";
+import { dayRouter } from "./routes/day.route";
 
-const util = new utils();
 util.log("Loading...");
 const PORT = Number(config.port ?? 4326);
-const defaultHeaders: ResponseInit["headers"] = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authentication, content-type, Ashenuuid",
-};
+const defaultHeaders = config.defaultHeaders;
 var startTime = new Date().getTime();
 
 try {
@@ -40,58 +38,14 @@ const server = Bun.serve({
   port: PORT,
   routes: {
     "/status": async () => {
-      util.debug("Recieved /status GET");
-      return new Response("OK", { headers: defaultHeaders });
-    },
-    "/list-tables": async () => {
-      util.debug("Received /list-tables GET; Calling DB");
-      const dbResult = await callDB("show tables", null, true);
-      util.debug(
-        "DB Returned: " +
-          JSON.stringify(dbResult[0]) +
-          "(" +
-          dbResult[1] +
-          "ms)",
-      );
-      return new Response(JSON.stringify(dbResult[0]), {
-        headers: defaultHeaders,
-      });
-    },
+      return await statusRouter.GET()
+    }, 
     "/day": {
       GET: async (req) => {
-        const headers = req.headers;
-        const authToken = headers.get("authentication")?.split("Bearer ")[1];
-        const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
-        if (authToken != "LSXRqq") {
-          return new Response(null, {
-            status: 401,
-            statusText: "Access Denied",
-            headers: defaultHeaders,
-          });
-        }
-        var result = 0;
-        const dbResult =
-          (await getTransactionsByDay(new Date(), Ashenuuid))[0] || "NONE";
-        if (dbResult.length > 0) {
-          for (let i = 0; i < dbResult.length; i++) {
-            if (dbResult[i].direction == "income") {
-              result += dbResult[i].amount;
-            } else {
-              result -= dbResult[i].amount;
-            }
-          }
-        } else {
-          return new Response("No Data Found", {
-            status: 204,
-            headers: defaultHeaders,
-          });
-        }
-        return Response.json(result, {
-          headers: defaultHeaders,
-        });
+        return await dayRouter.GET(req)
       },
       OPTIONS: async () => {
-        return new Response(null, { headers: defaultHeaders });
+        return await dayRouter.OPTIONS();
       },
     },
     "/today": {

@@ -1,6 +1,6 @@
-import { config } from "./config";
+import { config } from "../config";
 
-class utils {
+class Utils {
   debug(input: any) {
     if (!config.debugMode) return;
     console.log(
@@ -30,4 +30,6 @@ class utils {
   }
 }
 
-export { utils };
+const util = new Utils();
+
+export { util };

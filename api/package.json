@@ -1,6 +1,6 @@
 {
   "name": "api",
-  "module": "index.ts",
+  "module": "api.ts",
   "type": "module",
   "private": true,
   "devDependencies": {
@@ -10,8 +10,7 @@
     "typescript": "latest"
   },
   "scripts": {
-    "start": "bun run --env-file='db_server/.db.env' --env-file='.env' index.ts ",
-    "dev": "bun run index.ts --dev",
+    "start": "bun run --env-file='db_server/.db.env' --env-file='.env' api.ts ",
     "client": "bun run --hot ../lightweight-client/index.html"
   },
   "dependencies": {
