@@ -13,6 +13,10 @@ import { NIL } from "uuid";
 const util = new utils();
 util.log("Loading...");
 const PORT = Number(config.port ?? 4326);
+const defaultHeaders: ResponseInit["headers"] = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authentication, content-type",
+};
 var startTime = new Date().getTime();
 
 try {
@@ -36,7 +40,7 @@ const server = Bun.serve({
   routes: {
     "/status": async () => {
       util.debug("Recieved /status GET");
-      return new Response("OK");
+      return new Response("OK", { headers: defaultHeaders });
     },
     "/list-tables": async () => {
       util.debug("Received /list-tables GET; Calling DB");
@@ -48,7 +52,9 @@ const server = Bun.serve({
           dbResult[1] +
           "ms)",
       );
-      return new Response(JSON.stringify(dbResult[0]));
+      return new Response(JSON.stringify(dbResult[0]), {
+        headers: defaultHeaders,
+      });
     },
     "/transactions": {
       GET: async (req) => {
@@ -58,10 +64,16 @@ const server = Bun.serve({
           return new Response(null, {
             status: 401,
             statusText: "Access Denied",
+            headers: defaultHeaders,
           });
         }
         const dbResult = (await getTransactions()) || "NONE";
-        return Response.json(JSON.parse(JSON.stringify(dbResult[0])));
+        return Response.json(JSON.parse(JSON.stringify(dbResult[0])), {
+          headers: defaultHeaders,
+        });
+      },
+      OPTIONS: async () => {
+        return new Response(null, { headers: defaultHeaders });
       },
       POST: async (req) => {
         const headers = req.headers;
@@ -69,6 +81,7 @@ const server = Bun.serve({
         if (authToken != "LSXRqq") {
           return new Response(null, {
             status: 401,
+            headers: defaultHeaders,
           });
         }
         try {
@@ -82,6 +95,7 @@ const server = Bun.serve({
           ) {
             return new Response("Transaction not in correct format.", {
               status: 400,
+              headers: defaultHeaders,
             });
           }
           const inTransaction = newTransaction(
@@ -93,14 +107,20 @@ const server = Bun.serve({
           );
           await logTransaction(inTransaction);
         } catch (e) {
-          return new Response("Error: " + e, { status: 500 });
+          return new Response("Error: " + e, {
+            status: 500,
+            headers: defaultHeaders,
+          });
         }
-        return new Response("Completed", { status: 201 });
+        return new Response("Completed", {
+          status: 201,
+          headers: defaultHeaders,
+        });
       },
     },
   },
   fetch() {
-    return new Response("Not Found", { status: 404 });
+    return new Response("Not Found", { status: 404, headers: defaultHeaders });
   },
 });
 endTime = new Date().getTime();

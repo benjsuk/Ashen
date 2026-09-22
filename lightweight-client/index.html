@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test Client</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+<button onclick="get('status', 'get-st-res')">Get Status</button>
+    <p id="get-st-res"></p>
+
+    <button onclick="get('transactions', 'get-tr-res')">Get Transactions</button>
+    <p id="get-tr-res"></p>
+
+    <button onclick="testTransaction()">Send Test</button>
+    <p id="send-tr-test"></p>
+
+    <script>
+        function get(path,id){
+            fetch('https://api-ashen.benjs.uk/'+path, {
+                headers: {
+                    'authentication': 'Bearer LSXRqq'
+                }
+            })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(id).innerText = data
+                })
+                .catch(error =>  {
+                    document.getElementById(id).innerText = error
+                });
+        }
+
+        function testTransaction(){
+            fetch('https://api-ashen.benjs.uk/transactions', {
+                method: 'POST',
+                headers: {
+                    'authentication': 'Bearer LSXRqq',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    amount: 500,
+                    description: "test",
+                    date: new Date(),
+                    category: "test"
+                })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('send-tr-test').innerText = data
+                })
+                .catch(error =>  {
+                    document.getElementById('send-tr-test').innerText = error
+                });
+        }
+
+        
+    </script>
+</body>
+</html>

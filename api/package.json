@@ -11,7 +11,8 @@
   },
   "scripts": {
     "start": "bun run --env-file='db_server/.db.env' --env-file='.env' index.ts ",
-    "dev": "bun run index.ts --dev"
+    "dev": "bun run index.ts --dev",
+    "client": "bun run --hot ../lightweight-client/index.html"
   },
   "dependencies": {
     "firebase-admin": "^14.4.0",

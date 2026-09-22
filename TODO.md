@@ -42,9 +42,9 @@ The app can read and write real transaction data.
 - [x] Routes: `POST /transactions`, `GET /transactions`
 - [x] Request validation + proper 4xx/5xx responses
 - [x] Tick README: `Database → Schema`, `Database → Access Functions`
-- [x] Release: changelog + tag `v0.1.0-beta`
+- [x] Release: changelog + tag `v0.1.0`
 
-## M3 - Day & month totals → `v0.1.0`
+## M3 - Day & month totals → `v0.2.0`
 
 Answer "how much did I spend when?", per user, by day, month, or transaction.
 
@@ -52,7 +52,7 @@ Answer "how much did I spend when?", per user, by day, month, or transaction.
 - [ ] Refresh `days` balances (denormalized snapshot)
 - [ ] `GET /days?from=&to=`, per-day totals for a user
 - [ ] `GET /months`, monthly aggregation
-- [ ] Release: changelog + tag `v0.1.0`
+- [ ] Release: changelog + tag `v0.2.0`
 
 ## M4 - Authentication (Firebase) → `v0.2.0-alpha`
 
