@@ -1,3 +1,6 @@
 [submodule "Ashen-iOS"]
 	path = Ashen-iOS
 	url = https://github.com/benjsuk/Ashen-iOS
+[submodule "Ashen-Web"]
+	path = Ashen-Web
+	url = https://github.com/benjsuk/Ashen-Web.git
