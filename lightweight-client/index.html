@@ -15,6 +15,11 @@
     </button>
     <p id="get-tr-res"></p>
 
+     <button onclick="get('today', 'get-to-res')">
+      Get Today
+    </button>
+    <p id="get-to-res"></p>
+
     <button onclick="testTransaction()">Send Test</button>
     <p id="send-tr-test"></p>
 
@@ -44,7 +49,7 @@
           body: JSON.stringify({
             amount: 500,
             description: "test",
-            date: new Date(),
+            date: new Date("2026-09-21"),
             category: "test",
           }),
         })
@@ -54,7 +59,8 @@
           })
           .catch((error) => {
             document.getElementById("send-tr-test").innerText = error;
-          });
+          })
+          
       }
     </script>
   </body>

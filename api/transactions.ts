@@ -41,6 +41,14 @@ async function getTransactions(user?: string) {
   }
 }
 
+async function getTransactionsByDay(date: Date, user?: string){
+  if (!user) {
+    return await callDB("SELECT * FROM transactions WHERE date = ?", [date.toISOString().split("T")[0]]);
+  } else {
+    return await callDB("SELECT * FROM transactions WHERE date = ? AND userID = ?", [date.toISOString().split("T")[0], user]);
+  }
+}
+
 async function getTransaction(id: string) {
   return await callDB("SELECT * FROM transactions WHERE transactionID = ?", [
     id,
@@ -63,4 +71,4 @@ async function logTransaction(transaction: Transaction) {
 }
 
 export type { Transaction };
-export { getTransactions, logTransaction, newTransaction, getTransaction };
+export { getTransactions, logTransaction, newTransaction, getTransaction, getTransactionsByDay };

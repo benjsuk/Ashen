@@ -6,6 +6,7 @@ import {
   logTransaction,
   newTransaction,
   getTransaction,
+  getTransactionsByDay,
   type Transaction,
 } from "./transactions";
 import { NIL } from "uuid";
@@ -55,6 +56,26 @@ const server = Bun.serve({
       return new Response(JSON.stringify(dbResult[0]), {
         headers: defaultHeaders,
       });
+    },
+    "/today": {
+      GET: async (req) => {
+        const headers = req.headers;
+        const authToken = headers.get("authentication")?.split("Bearer ")[1];
+        if (authToken != "LSXRqq") {
+          return new Response(null, {
+            status: 401,
+            statusText: "Access Denied",
+            headers: defaultHeaders,
+          });
+        }
+        const dbResult = (await getTransactionsByDay(new Date())) || "NONE";
+        return Response.json(JSON.parse(JSON.stringify(dbResult[0])), {
+          headers: defaultHeaders,
+        });
+      },
+      OPTIONS: async () => {
+        return new Response(null, { headers: defaultHeaders });
+      },
     },
     "/transactions": {
       GET: async (req) => {
