@@ -1,6 +1,6 @@
 # Versioning
 
-> This applies to all versions after `0.1.0`
+> This applies from `0.2.0` onwards
 
 Standard semver system of `major.minor.patch` to be used with minor additions:
   - All pre-prod versions to be `0.x.x`.
