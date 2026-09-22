@@ -68,8 +68,23 @@ const server = Bun.serve({
             headers: defaultHeaders,
           });
         }
-        const dbResult = (await getTransactionsByDay(new Date())) || "NONE";
-        return Response.json(JSON.parse(JSON.stringify(dbResult[0])), {
+        var result = 0;
+        const dbResult = (await getTransactionsByDay(new Date()))[0] || "NONE";
+        if (dbResult.length > 0){
+          for (let i = 0; i < dbResult.length; i++) {
+            if (dbResult[i].direction == "income"){
+            result += dbResult[i].amount}
+else {
+  result -= dbResult[i].amount
+}
+          }
+        } else {
+          return new Response("No Data Found", {
+            status: 204,
+            headers: defaultHeaders
+          })
+        }
+        return Response.json((result), {
           headers: defaultHeaders,
         });
       },
