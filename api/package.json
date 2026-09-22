@@ -7,7 +7,7 @@
     "@types/bun": "latest"
   },
   "peerDependencies": {
-    "typescript": "^7"
+    "typescript": "latest"
   },
   "scripts": {
     "start": "bun run --env-file='db_server/.db.env' --env-file='.env' index.ts ",
@@ -15,8 +15,8 @@
     "client": "bun run --hot ../lightweight-client/index.html"
   },
   "dependencies": {
-    "firebase-admin": "^14.4.0",
-    "uuid": "^14.0.2"
+    "firebase-admin": "latest",
+    "uuid": "latest"
   },
   "version": "0.1.0"
 }
