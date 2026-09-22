@@ -48,7 +48,8 @@ The app can read and write real transaction data.
 
 Answer "how much did I spend when?", per user, by day, month, or transaction.
 
-- [ ] Compute per-day totals from `transactions` (group by date)
+- [x] Compute per-day totals from `transactions` (group by date)
+- [x] `GET /today`, specifically today's total
 - [ ] `POST /days`, adding balances to the days
 - [ ] `GET /days?from=&to=`, per-day totals for a user
 - [ ] `GET /months`, monthly aggregation
