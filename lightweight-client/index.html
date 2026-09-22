@@ -15,9 +15,7 @@
     </button>
     <p id="get-tr-res"></p>
 
-     <button onclick="get('today', 'get-to-res')">
-      Get Today
-    </button>
+    <button onclick="get('today', 'get-to-res')">Get Today</button>
     <p id="get-to-res"></p>
 
     <button onclick="testTransaction()">Send Test</button>
@@ -59,8 +57,7 @@
           })
           .catch((error) => {
             document.getElementById("send-tr-test").innerText = error;
-          })
-          
+          });
       }
     </script>
   </body>

@@ -41,11 +41,16 @@ async function getTransactions(user?: string) {
   }
 }
 
-async function getTransactionsByDay(date: Date, user?: string){
+async function getTransactionsByDay(date: Date, user?: string) {
   if (!user) {
-    return await callDB("SELECT * FROM transactions WHERE date = ?", [date.toISOString().split("T")[0]]);
+    return await callDB("SELECT * FROM transactions WHERE date = ?", [
+      date.toISOString().split("T")[0],
+    ]);
   } else {
-    return await callDB("SELECT * FROM transactions WHERE date = ? AND userID = ?", [date.toISOString().split("T")[0], user]);
+    return await callDB(
+      "SELECT * FROM transactions WHERE date = ? AND userID = ?",
+      [date.toISOString().split("T")[0], user],
+    );
   }
 }
 
@@ -71,4 +76,10 @@ async function logTransaction(transaction: Transaction) {
 }
 
 export type { Transaction };
-export { getTransactions, logTransaction, newTransaction, getTransaction, getTransactionsByDay };
+export {
+  getTransactions,
+  logTransaction,
+  newTransaction,
+  getTransaction,
+  getTransactionsByDay,
+};
