@@ -92,7 +92,11 @@ const server = Bun.serve({
             !request.description ||
             !request.date ||
             !((request.amount as number) > 0) ||
-            !(!request.direction || request.direction == "expense" || request.direction == "income")
+            !(
+              !request.direction ||
+              request.direction == "expense" ||
+              request.direction == "income"
+            )
           ) {
             return new Response("Transaction not in correct format.", {
               status: 400,
@@ -105,7 +109,7 @@ const server = Bun.serve({
             new Date(request.date),
             request.category || null,
             request.user || null,
-            request.direction || null
+            request.direction || null,
           );
           await logTransaction(inTransaction);
         } catch (e) {

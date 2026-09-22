@@ -1,7 +1,7 @@
 import { v7 as uuid, NIL as nil } from "uuid";
 import { callDB } from "./db";
 
-type Direction = "income"|"expense"
+type Direction = "income" | "expense";
 
 type Transaction = {
   id: string; // PK
@@ -22,7 +22,15 @@ function newTransaction(
   direction?: Direction,
 ) {
   if (!user) user = nil;
-  return <Transaction>{ id: uuid(), amount, description, date, category, user, direction };
+  return <Transaction>{
+    id: uuid(),
+    amount,
+    description,
+    date,
+    category,
+    user,
+    direction,
+  };
 }
 
 async function getTransactions(user?: string) {
@@ -49,7 +57,7 @@ async function logTransaction(transaction: Transaction) {
       transaction.date.toISOString().split("T")[0],
       transaction.category || null,
       transaction.user,
-      transaction.direction || "expense"
+      transaction.direction || "expense",
     ],
   );
 }
