@@ -16,7 +16,7 @@ util.log("Loading...");
 const PORT = Number(config.port ?? 4326);
 const defaultHeaders: ResponseInit["headers"] = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authentication, content-type",
+  "Access-Control-Allow-Headers": "authentication, content-type, Ashenuuid",
 };
 var startTime = new Date().getTime();
 
@@ -57,10 +57,11 @@ const server = Bun.serve({
         headers: defaultHeaders,
       });
     },
-    "/today": {
+    "/day": {
       GET: async (req) => {
         const headers = req.headers;
         const authToken = headers.get("authentication")?.split("Bearer ")[1];
+        const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
         if (authToken != "LSXRqq") {
           return new Response(null, {
             status: 401,
@@ -69,7 +70,44 @@ const server = Bun.serve({
           });
         }
         var result = 0;
-        const dbResult = (await getTransactionsByDay(new Date()))[0] || "NONE";
+        const dbResult = (await getTransactionsByDay(new Date(), Ashenuuid))[0] || "NONE";
+        if (dbResult.length > 0) {
+          for (let i = 0; i < dbResult.length; i++) {
+            if (dbResult[i].direction == "income") {
+              result += dbResult[i].amount;
+            } else {
+              result -= dbResult[i].amount;
+            }
+          }
+        } else {
+          return new Response("No Data Found", {
+            status: 204,
+            headers: defaultHeaders,
+          });
+        }
+        return Response.json(result, {
+          headers: defaultHeaders,
+        });
+      },
+      OPTIONS: async () => {
+        return new Response(null, { headers: defaultHeaders });
+      },
+    },
+    "/today": {
+      GET: async (req) => {
+        const headers = req.headers;
+        const authToken = headers.get("authentication")?.split("Bearer ")[1];
+        const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
+        util.debug(Ashenuuid)
+        if (authToken != "LSXRqq") {
+          return new Response(null, {
+            status: 401,
+            statusText: "Access Denied",
+            headers: defaultHeaders,
+          });
+        }
+        var result = 0;
+        const dbResult = (await getTransactionsByDay(new Date(), Ashenuuid))[0] || "NONE";
         if (dbResult.length > 0) {
           for (let i = 0; i < dbResult.length; i++) {
             if (dbResult[i].direction == "income") {
