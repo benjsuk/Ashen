@@ -6,7 +6,10 @@ type Day = {
   balance: number;
 };
 
-async function getDay(date?: Date, user?: string) {
+/**
+ * @returns `[day, totals]` - Balance for the day, total transaction diff
+ */
+async function getDay(date: Date, user: string) {
   if (!date) {
     date = new Date();
   }

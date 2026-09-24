@@ -61,15 +61,15 @@ const server = Bun.serve({
             headers: defaultHeaders,
           });
         }
-        var result = 0;
+        var total = 0;
         const dbResult =
           (await getTransactionsByDay(new Date(), Ashenuuid))[0] || "NONE";
         if (dbResult.length > 0) {
           for (let i = 0; i < dbResult.length; i++) {
             if (dbResult[i].direction == "income") {
-              result += dbResult[i].amount;
+              total += dbResult[i].amount;
             } else {
-              result -= dbResult[i].amount;
+              total -= dbResult[i].amount;
             }
           }
         } else {
@@ -78,7 +78,7 @@ const server = Bun.serve({
             headers: defaultHeaders,
           });
         }
-        return Response.json(result, {
+        return new Response(`${total}`, {
           headers: defaultHeaders,
         });
       },
