@@ -1,15 +1,6 @@
 import { util } from "./scripts/utils";
 import { config } from "./config";
-import { callDB, startDB, stopDB } from "./scripts/db";
-import {
-  getTransactions,
-  logTransaction,
-  newTransaction,
-  getTransaction,
-  getTransactionsByDay,
-  type Transaction,
-} from "./scripts/transactions";
-import { NIL } from "uuid";
+import { startDB, stopDB } from "./scripts/db";
 import { statusRouter } from "./routes/status.route";
 import { dayRouter } from "./routes/day.route";
 import { todayRouter } from "./routes/today.route";
