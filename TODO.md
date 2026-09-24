@@ -50,6 +50,8 @@ Answer "how much did I spend when?", per user, by day, month, or transaction.
 
 - [x] Compute per-day totals from `transactions` (group by date)
 - [x] `GET /today`, specifically today's total
+- [ ] Split routes into files
+- [ ] Segment auth
 - [ ] `POST /days`, adding balances to the days
 - [ ] `GET /days?from=&to=`, per-day totals for a user
 - [ ] `GET /months`, monthly aggregation

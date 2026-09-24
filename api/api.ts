@@ -12,6 +12,8 @@ import {
 import { NIL } from "uuid";
 import { statusRouter } from "./routes/status.route";
 import { dayRouter } from "./routes/day.route";
+import { todayRouter } from "./routes/today.route";
+import { transactionsRouter } from "./routes/transactions.route";
 
 util.log("Loading...");
 const PORT = Number(config.port ?? 4326);
@@ -34,124 +36,41 @@ util.debug(
 util.debug("Starting Bun Server...");
 startTime = new Date().getTime();
 
+async function OPTIONS() {
+    return new Response(null, { headers: config.defaultHeaders });
+  }
+
 const server = Bun.serve({
   port: PORT,
   routes: {
     "/status": async () => {
       return await statusRouter.GET();
     },
-    "/day": {
+    "/day/:day": {
       GET: async (req) => {
         return await dayRouter.GET(req);
       },
       OPTIONS: async () => {
-        return await dayRouter.OPTIONS();
+        return await OPTIONS();
       },
     },
     "/today": {
       GET: async (req) => {
-        const headers = req.headers;
-        const authToken = headers.get("authentication")?.split("Bearer ")[1];
-        const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
-        util.debug(Ashenuuid);
-        if (authToken != "LSXRqq") {
-          return new Response(null, {
-            status: 401,
-            statusText: "Access Denied",
-            headers: defaultHeaders,
-          });
-        }
-        var total = 0;
-        const dbResult =
-          (await getTransactionsByDay(new Date(), Ashenuuid))[0] || "NONE";
-        if (dbResult.length > 0) {
-          for (let i = 0; i < dbResult.length; i++) {
-            if (dbResult[i].direction == "income") {
-              total += dbResult[i].amount;
-            } else {
-              total -= dbResult[i].amount;
-            }
-          }
-        } else {
-          return new Response("No Data Found", {
-            status: 204,
-            headers: defaultHeaders,
-          });
-        }
-        return new Response(`${total}`, {
-          headers: defaultHeaders,
-        });
+        return await todayRouter.GET(req)
       },
       OPTIONS: async () => {
-        return new Response(null, { headers: defaultHeaders });
+        return await OPTIONS();
       },
     },
     "/transactions": {
       GET: async (req) => {
-        const headers = req.headers;
-        const authToken = headers.get("authentication")?.split("Bearer ")[1];
-        if (authToken != "LSXRqq") {
-          return new Response(null, {
-            status: 401,
-            statusText: "Access Denied",
-            headers: defaultHeaders,
-          });
-        }
-        const dbResult = (await getTransactions()) || "NONE";
-        return Response.json(JSON.parse(JSON.stringify(dbResult[0])), {
-          headers: defaultHeaders,
-        });
+       return await transactionsRouter.GET(req);
       },
       OPTIONS: async () => {
-        return new Response(null, { headers: defaultHeaders });
+        return await OPTIONS();
       },
       POST: async (req) => {
-        const headers = req.headers;
-        const authToken = headers.get("authentication")?.split("Bearer ")[1];
-        if (authToken != "LSXRqq") {
-          return new Response(null, {
-            status: 401,
-            headers: defaultHeaders,
-          });
-        }
-        try {
-          let request: any = await req.json();
-          request = JSON.parse(JSON.stringify(request));
-          if (
-            !request.amount ||
-            !request.description ||
-            !request.date ||
-            !((request.amount as number) > 0) ||
-            !(
-              !request.direction ||
-              request.direction == "expense" ||
-              request.direction == "income"
-            )
-          ) {
-            return new Response("Transaction not in correct format.", {
-              status: 400,
-              headers: defaultHeaders,
-            });
-          }
-          const inTransaction = newTransaction(
-            request.amount,
-            request.description,
-            new Date(request.date),
-            request.category || null,
-            request.user || null,
-            request.direction || null,
-          );
-          await logTransaction(inTransaction);
-        } catch (e) {
-          return new Response("Error: " + e, {
-            status: 500,
-            headers: defaultHeaders,
-          });
-        }
-        return new Response("Completed", {
-          status: 201,
-          headers: defaultHeaders,
-        });
+        return await transactionsRouter.POST(req);
       },
     },
   },
