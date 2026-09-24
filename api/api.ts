@@ -37,8 +37,8 @@ util.debug("Starting Bun Server...");
 startTime = new Date().getTime();
 
 async function OPTIONS() {
-    return new Response(null, { headers: config.defaultHeaders });
-  }
+  return new Response(null, { headers: config.defaultHeaders });
+}
 
 const server = Bun.serve({
   port: PORT,
@@ -56,7 +56,7 @@ const server = Bun.serve({
     },
     "/today": {
       GET: async (req) => {
-        return await todayRouter.GET(req)
+        return await todayRouter.GET(req);
       },
       OPTIONS: async () => {
         return await OPTIONS();
@@ -64,7 +64,7 @@ const server = Bun.serve({
     },
     "/transactions": {
       GET: async (req) => {
-       return await transactionsRouter.GET(req);
+        return await transactionsRouter.GET(req);
       },
       OPTIONS: async () => {
         return await OPTIONS();
