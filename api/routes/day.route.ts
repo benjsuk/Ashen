@@ -17,7 +17,7 @@ class Day {
       });
     }
     const body = req.body;
-    const result = getDay(new Date(body.date), Ashenuuid)
+    const result = getDay(new Date(body.date), Ashenuuid);
     return Response.json(result, {
       headers: config.defaultHeaders,
     });
