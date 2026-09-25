@@ -10,9 +10,14 @@ function fail(message: string): never {
 if (!version) {
   fail("Usage: bun run release <x.y.z>");
 }
-if (!/^\d+\.\d+\.\d+$/.test(version)) {
-  fail(`Invalid version "${version}" — expected x.y.z (e.g. 0.2.0).`);
+if (!/^\d+\.\d+\.\d+(-(alpha|beta))?$/.test(version)) {
+  fail(
+    `Invalid version "${version}" — expected x.y.z (e.g. 0.2.0) or x.y.z-alpha / x.y.z-beta.`,
+  );
 }
+
+const isPrerelease =
+  /-(alpha|beta)$/.test(version) || Number.parseInt(version.split(".")[0]!) < 1;
 
 const pkgPath = "package.json";
 const changelogPath = "../CHANGELOG.md";
@@ -101,7 +106,11 @@ try {
   await $`git push origin v${version}`;
 } catch (error) {
   console.error("Push failed. The commit and tag were created locally.");
-  console.error(error);
+  if (isPrerelease) {
+    await $`gh release create v${version} --title v${version} --prerelease --notes-file ${notesPath}`;
+  } else {
+    await $`gh release create v${version} --title v${version} --notes-file ${notesPath}`;
+  }
   process.exit(1);
 }
 
