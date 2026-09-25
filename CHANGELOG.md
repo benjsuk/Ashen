@@ -1,5 +1,8 @@
 ## [0.2.0] - 2026-09-25
 
+> [!NOTE]
+> Changelog refers to last released version, not last commit. Check tags.
+
 ### Added
 - Added Lightweight Client.
 - Added CORS headers and OPTIONS.
@@ -14,9 +17,6 @@
 - Major refactor - Routes are now separate files which can be changed independantly.
 
 ## [0.1.0] - 2026-09-22
-
-> [!NOTE]
-> Changelog refers to last released version, not last commit. Check tags.
 
 ### Added
 

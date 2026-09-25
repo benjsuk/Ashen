@@ -18,6 +18,9 @@ const pkgPath = "package.json";
 const changelogPath = "../CHANGELOG.md";
 const unreleasedPath = "../.UNRELEASED-CHANGELOG.md";
 const notesPath = "../.release-notes.tmp";
+const changelogNote =
+  "> [!NOTE]\n" +
+  "> Changelog refers to last released version, not last commit. Check tags.\n";
 
 const pkg = await Bun.file(pkgPath).json();
 const previous: string = pkg.version;
@@ -47,7 +50,10 @@ const added = extractSection("Added");
 const changed = extractSection("Changed");
 const fixed = extractSection("Fixed");
 
-const changelog = await Bun.file(changelogPath).text();
+const changelog = (await Bun.file(changelogPath).text()).replaceAll(
+  changelogNote + "\n",
+  "",
+);
 if (changelog.includes(`## [${version}]`)) {
   fail(
     `CHANGELOG.md already contains a [${version}] section. Bump the version.`,
@@ -55,7 +61,7 @@ if (changelog.includes(`## [${version}]`)) {
 }
 
 const date = new Date().toISOString().slice(0, 10);
-let block = `## [${version}] - ${date}\n`;
+let block = `## [${version}] - ${date}\n\n${changelogNote}`;
 for (const [title, items] of [
   ["Added", added],
   ["Changed", changed],
