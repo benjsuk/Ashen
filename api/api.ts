@@ -46,7 +46,7 @@ const server = Bun.serve({
       },
       POST: async (req) => {
         return await dayRouter.POST(req);
-      }
+      },
     },
     "/today": {
       GET: async (req) => {
