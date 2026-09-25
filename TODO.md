@@ -59,6 +59,7 @@ Answer "how much did I spend when?", per user, by day, month, or transaction.
 ## M4 - Authentication (Firebase) - > `0.3.0-proactive`
 
 Every request identified; all data segmented by real users.
+
 - [ ] Make all times UK time for consistency
 - [ ] Set up Firebase project + initialize `firebase-admin`
 - [ ] Migrate schema: `userID` -> `varchar(128)` (Firebase UID); drop dev-user seed
