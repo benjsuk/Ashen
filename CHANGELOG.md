@@ -1,3 +1,18 @@
+## [0.2.0] - 2026-09-25
+
+### Added
+- Added Lightweight Client.
+- Added CORS headers and OPTIONS.
+- Added Versioning system at `VERSIONING.md`.
+- Created proactive Ashen-Web sub-module.
+- Added `/today` endpoint which will calculate total amount for the day.
+- Added `/day` endpoint to get / write one day
+- Added `/days` to batch get info for a collection of days
+
+### Changed
+- Transactions now have a `direction` attribute, which will either be `income` or `expense`, this means not having to deal with negative numbers in either direction.
+- Major refactor - Routes are now separate files which can be changed independantly.
+
 ## [0.1.0] - 2026-09-22
 
 > [!NOTE]
