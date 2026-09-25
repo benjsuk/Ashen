@@ -15,11 +15,11 @@ async function getDay(date: Date, user: string) {
   var income = 0;
   var expense = 0;
   for (let i = 0; i < transactions[0].length; i++) {
-    const transaction = transactions[0][i]
-    if (transaction.direction == "income"){
-      income += transaction.amount
+    const transaction = transactions[0][i];
+    if (transaction.direction == "income") {
+      income += transaction.amount;
     } else {
-      expense += transaction.amount
+      expense += transaction.amount;
     }
   }
 
@@ -27,16 +27,15 @@ async function getDay(date: Date, user: string) {
     date: date.toISOString().split("T")[0],
     balance: day[0][0]?.balance ?? null,
     income: income,
-    expense: expense
+    expense: expense,
   };
 }
 
 async function setDay(date: Date, user: string, balance: number) {
-  await callDB("INSERT INTO days (date, userID, balance) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE balance = VALUES(balance)", [
-    date.toISOString().split("T")[0],
-    user,
-    balance,
-  ]);
+  await callDB(
+    "INSERT INTO days (date, userID, balance) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE balance = VALUES(balance)",
+    [date.toISOString().split("T")[0], user, balance],
+  );
 }
 
 export { getDay, setDay };

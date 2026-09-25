@@ -33,20 +33,21 @@ class Day {
         });
       }
       const day = new Date(req.params.day);
-      try{Number(req.body.balance)}catch{
-        throw "Validation"
-      }
-      
       try {
-await setDay(
-        day,
-        Ashenuuid,
-        req.body.balance
-      )
+        Number(req.body.balance);
       } catch {
-return new Response(null,{status:500, headers:config.defaultHeaders})
+        throw "Validation";
       }
-      return new Response("OK", {headers: config.defaultHeaders});
+
+      try {
+        await setDay(day, Ashenuuid, req.body.balance);
+      } catch {
+        return new Response(null, {
+          status: 500,
+          headers: config.defaultHeaders,
+        });
+      }
+      return new Response("OK", { headers: config.defaultHeaders });
     } catch (e) {
       util.error(e);
       return new Response(null, {
