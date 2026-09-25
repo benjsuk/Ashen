@@ -4,6 +4,7 @@
 > Changelog refers to last released version, not last commit. Check tags.
 
 ### Fixed
+
 - Fixed Release Code
 
 ## [0.2.0] - 2026-09-25
