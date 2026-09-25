@@ -54,13 +54,11 @@ async function getTransactionsByDay(date: Date, user: string) {
   }
 }
 
-async function getTransactionsByDays(from: Date, to:Date, user: string) {
-
-    return await callDB(
-      "SELECT * FROM transactions WHERE date BETWEEN ? AND ? AND userID = ?",
-      [from.toISOString().split("T")[0], to.toISOString().split("T")[0], user],
-    );
-  
+async function getTransactionsByDays(from: Date, to: Date, user: string) {
+  return await callDB(
+    "SELECT * FROM transactions WHERE date BETWEEN ? AND ? AND userID = ?",
+    [from.toISOString().split("T")[0], to.toISOString().split("T")[0], user],
+  );
 }
 
 async function getTransaction(id: string) {
@@ -91,5 +89,5 @@ export {
   newTransaction,
   getTransaction,
   getTransactionsByDay,
-  getTransactionsByDays
+  getTransactionsByDays,
 };
