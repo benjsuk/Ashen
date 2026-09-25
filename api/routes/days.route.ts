@@ -1,8 +1,6 @@
 import { config } from "../config";
 import { NIL } from "uuid";
-import type { Day } from "../scripts/days";
-import { getDay, setDay } from "../scripts/days";
-import { util } from "../scripts/utils";
+import { getDays } from "../scripts/days";
 
 class Days {
   async GET(req: any) {
@@ -24,19 +22,7 @@ class Days {
         headers: config.defaultHeaders,
       });
 
-    let dates: Date[] = [];
-    const theDate = from;
-    while (theDate < to) {
-      dates.push(new Date(theDate));
-      theDate.setDate(theDate.getDate() + 1);
-    }
-    const dayData: any[] = [];
-    for (let i = 0; i < dates.length; i++) {
-      const thisDay: Date = dates[i] ?? new Date(0);
-      const thisDayData = await getDay(thisDay, Ashenuuid);
-      dayData.push(thisDayData);
-    }
-
+    const dayData = await getDays(from, to, Ashenuuid);
     return Response.json(dayData, { headers: config.defaultHeaders });
   }
 }
