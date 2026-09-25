@@ -1,6 +1,7 @@
 ## [0.2.0] - 2026-09-25
 
 ### Added
+
 - Added Lightweight Client.
 - Added CORS headers and OPTIONS.
 - Added Versioning system at `VERSIONING.md`.
@@ -10,5 +11,6 @@
 - Added `/days` to batch get info for a collection of days
 
 ### Changed
+
 - Transactions now have a `direction` attribute, which will either be `income` or `expense`, this means not having to deal with negative numbers in either direction.
 - Major refactor - Routes are now separate files which can be changed independantly.
