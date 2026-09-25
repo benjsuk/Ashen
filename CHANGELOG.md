@@ -1,7 +1,12 @@
-## [0.2.0] - 2026-09-25
+## [0.2.1] - 2026-09-25
 
 > [!NOTE]
 > Changelog refers to last released version, not last commit. Check tags.
+
+### Fixed
+- Fixed Release Code
+
+## [0.2.0] - 2026-09-25
 
 ### Added
 
