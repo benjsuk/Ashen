@@ -49,7 +49,9 @@ const fixed = extractSection("Fixed");
 
 const changelog = await Bun.file(changelogPath).text();
 if (changelog.includes(`## [${version}]`)) {
-  fail(`CHANGELOG.md already contains a [${version}] section. Bump the version.`);
+  fail(
+    `CHANGELOG.md already contains a [${version}] section. Bump the version.`,
+  );
 }
 
 const date = new Date().toISOString().slice(0, 10);
@@ -65,7 +67,9 @@ for (const [title, items] of [
 }
 
 if (added.length === 0 && changed.length === 0 && fixed.length === 0) {
-  console.warn("Warning: no Added/Changed/Fixed notes found in .UNRELEASED-CHANGELOG.md");
+  console.warn(
+    "Warning: no Added/Changed/Fixed notes found in .UNRELEASED-CHANGELOG.md",
+  );
 }
 
 console.log("Releasing with the following changelog entry:\n");
@@ -99,7 +103,9 @@ if (Bun.which("gh")) {
   await $`gh release create v${version} --title v${version} --notes-file ${notesPath}`;
   console.log(`GitHub release v${version} created.`);
 } else {
-  console.log("gh CLI not found — create the GitHub release manually and paste the notes above.");
+  console.log(
+    "gh CLI not found — create the GitHub release manually and paste the notes above.",
+  );
 }
 
 await $`rm -f ${notesPath}`;
