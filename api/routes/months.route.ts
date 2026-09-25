@@ -5,7 +5,7 @@ import { util } from "../scripts/utils";
 
 class Month {
   async GET(req: any) {
-   const headers = req.headers;
+    const headers = req.headers;
     const authToken = headers.get("authentication")?.split("Bearer ")[1];
     const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
     if (authToken != "LSXRqq") {
@@ -15,8 +15,7 @@ class Month {
         headers: config.defaultHeaders,
       });
     }
-    const mFrom = req.params.from
-    const mTo = req.params.today
-    
+    const mFrom = req.params.from;
+    const mTo = req.params.today;
   }
 }
