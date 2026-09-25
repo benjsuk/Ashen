@@ -1,6 +1,7 @@
 import { config } from "../config";
 import { NIL } from "uuid";
 import { getDay } from "../scripts/days";
+import { util } from "../scripts/utils";
 
 class Day {
   async GET(req: any) {
@@ -14,13 +15,24 @@ class Day {
         headers: config.defaultHeaders,
       });
     }
-    const body = req.body;
-    const result = getDay(new Date(body.date), Ashenuuid);
+    const result = await getDay(new Date(req.params.day), Ashenuuid);
     return Response.json(result, {
       headers: config.defaultHeaders,
     });
   }
-  async POST() {}
+  async POST(req: any) {
+    try {
+      const day = new Date(req.params.day);
+
+      return new Response();
+    } catch (e) {
+      util.error(e);
+      return new Response(null, {
+        status: 400,
+        headers: config.defaultHeaders,
+      });
+    }
+  }
 }
 
 const dayRouter = new Day();

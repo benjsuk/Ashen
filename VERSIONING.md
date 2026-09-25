@@ -2,7 +2,7 @@
 
 > This applies from `0.2.0` onwards
 
-Standard semver system of `major.minor.patch` to be used with minor additions:
+Standard semver system of `major.minor.patch` to be used with minor changes:
 
 - All pre-prod versions to be `0.x.x`.
 - Any references to future versions must be labelled as `x.x.x-proactive`. (-proactive is a planning and docs label only, never to be tagged, added to `package.json`, etc)
