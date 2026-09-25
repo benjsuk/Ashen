@@ -57,6 +57,14 @@ const server = Bun.serve({
         return await OPTIONS();
       },
     },
+    "/months/:from/:to": {
+      GET: async (req) => {
+        return await daysRouter.GET(req);
+      },
+      OPTIONS: async () => {
+        return await OPTIONS();
+      },
+    },
     "/today": {
       GET: async (req) => {
         return await todayRouter.GET(req);

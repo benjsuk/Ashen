@@ -54,7 +54,7 @@ Answer "how much did I spend when?", per user, by day, month, or transaction.
 - [x] `POST /day/:day`, adding balances to the days
 - [x] `GET /days/:from/:to`, per-day totals for a user
 - [ ] `GET /months`, monthly aggregation
-- [ ] Re-arrange files to be a bit more clean.
+- [x] Re-arrange files to be a bit more clean.
 - [ ] Release: changelog + tag `v0.2.0`
 
 ## M4 - Authentication (Firebase)
