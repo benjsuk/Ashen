@@ -44,7 +44,7 @@ The app can read and write real transaction data.
 - [x] Tick README: `Database -> Schema`, `Database -> Access Functions`
 - [x] Release: changelog + tag `v0.1.0`
 
-## M3 - Day & month totals -> `v0.2.0-proactive`
+## M3 - Day & month totals -> `v0.2.0`
 
 Answer "how much did I spend when?", per user, by day, month, or transaction.
 
@@ -53,14 +53,13 @@ Answer "how much did I spend when?", per user, by day, month, or transaction.
 - [x] Split routes into files
 - [x] `POST /day/:day`, adding balances to the days
 - [x] `GET /days/:from/:to`, per-day totals for a user
-- [ ] `GET /months`, monthly aggregation
 - [x] Re-arrange files to be a bit more clean.
-- [ ] Release: changelog + tag `v0.2.0`
+- [x] Release: changelog + tag `v0.2.0`
 
-## M4 - Authentication (Firebase)
+## M4 - Authentication (Firebase) - > `0.3.0-proactive`
 
 Every request identified; all data segmented by real users.
-
+- [ ] Make all times UK time for consistency
 - [ ] Set up Firebase project + initialize `firebase-admin`
 - [ ] Migrate schema: `userID` -> `varchar(128)` (Firebase UID); drop dev-user seed
 - [ ] Auth middleware, verify bearer ID token -> `uid`
@@ -72,6 +71,7 @@ Every request identified; all data segmented by real users.
 
 - [ ] Budget schema (per-user, per-category, per-month limits)
 - [ ] Set/get budget routes
+- [ ] `GET /months`, monthly aggregation
 - [ ] Actual vs budget comparison endpoint
 
 ## M6 - Balance graph data
