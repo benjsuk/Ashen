@@ -33,10 +33,8 @@ class Day {
         });
       }
       const day = new Date(req.params.day);
-      try {
-        Number(req.body.balance);
-      } catch {
-        throw "Validation";
+      if (!Number.isInteger(req.body.balance)){
+        throw "Validation"
       }
 
       try {

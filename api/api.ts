@@ -5,6 +5,7 @@ import { statusRouter } from "./routes/status.route";
 import { dayRouter } from "./routes/day.route";
 import { todayRouter } from "./routes/today.route";
 import { transactionsRouter } from "./routes/transactions.route";
+import { daysRouter } from "./routes/days.route";
 
 util.log("Loading...");
 const PORT = Number(config.port ?? 4326);
@@ -47,6 +48,14 @@ const server = Bun.serve({
       POST: async (req) => {
         return await dayRouter.POST(req);
       },
+    },
+    "/days/:from/:to": {
+      GET: async (req) => {
+        return await daysRouter.GET(req);
+      },
+      OPTIONS: async () => {
+        return await OPTIONS();
+      }
     },
     "/today": {
       GET: async (req) => {
