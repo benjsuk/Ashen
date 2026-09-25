@@ -55,7 +55,7 @@ const server = Bun.serve({
       },
       OPTIONS: async () => {
         return await OPTIONS();
-      }
+      },
     },
     "/today": {
       GET: async (req) => {
