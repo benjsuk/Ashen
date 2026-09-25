@@ -87,7 +87,7 @@ await Bun.write(unreleasedPath, skeleton);
 await Bun.write(notesPath, block);
 
 await $`git add package.json ../CHANGELOG.md ../.UNRELEASED-CHANGELOG.md`;
-await $`git commit -m Release v${version}`;
+await $`git commit -m ${`Release v${version}`}`;
 await $`git tag -a v${version} -F ${notesPath}`;
 
 try {
