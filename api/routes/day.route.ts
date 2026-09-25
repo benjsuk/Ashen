@@ -1,6 +1,6 @@
 import { config } from "../config";
 import { NIL } from "uuid";
-import { getDay } from "../scripts/days";
+import { getDay, setDay } from "../scripts/days";
 import { util } from "../scripts/utils";
 
 class Day {
@@ -22,9 +22,31 @@ class Day {
   }
   async POST(req: any) {
     try {
+      const headers = req.headers;
+      const authToken = headers.get("authentication")?.split("Bearer ")[1];
+      const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
+      if (authToken != "LSXRqq") {
+        return new Response(null, {
+          status: 401,
+          statusText: "Access Denied",
+          headers: config.defaultHeaders,
+        });
+      }
       const day = new Date(req.params.day);
-
-      return new Response();
+      try{Number(req.body.balance)}catch{
+        throw "Validation"
+      }
+      
+      try {
+await setDay(
+        day,
+        Ashenuuid,
+        req.body.balance
+      )
+      } catch {
+return new Response(null,{status:500, headers:config.defaultHeaders})
+      }
+      return new Response("OK", {headers: config.defaultHeaders});
     } catch (e) {
       util.error(e);
       return new Response(null, {
