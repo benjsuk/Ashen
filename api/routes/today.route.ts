@@ -4,7 +4,7 @@ import { getTransactionsByDay } from "../scripts/transactions";
 import { NIL } from "uuid";
 
 class Today {
-  async GET(req: Request) {
+  async GET(req: any) {
     const headers = req.headers;
     const authToken = headers.get("authentication")?.split("Bearer ")[1];
     const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");

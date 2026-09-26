@@ -4,7 +4,7 @@ import { getDay, setDay } from "../scripts/days";
 import { util } from "../scripts/utils";
 
 class Day {
-  async GET(req: Request) {
+  async GET(req: any) {
     const headers = req.headers;
     const authToken = headers.get("authentication")?.split("Bearer ")[1];
     const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
@@ -20,7 +20,7 @@ class Day {
       headers: config.defaultHeaders,
     });
   }
-  async POST(req: Request) {
+  async POST(req: any) {
     try {
       const headers = req.headers;
       const authToken = headers.get("authentication")?.split("Bearer ")[1];

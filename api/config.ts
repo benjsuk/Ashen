@@ -7,7 +7,7 @@ class config {
   static port = 4326;
   static defaultHeaders: ResponseInit["headers"] = {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "authentication, content-type, Ashenuuid",
+    "Access-Control-Allow-Headers": "Authorization, content-type, Ashenuuid",
   };
   static dateFmt = new Intl.DateTimeFormat("en-CA", {
     timeZone: "Europe/London",

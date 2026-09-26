@@ -6,7 +6,7 @@ import {
 } from "../scripts/transactions";
 
 class Transactions {
-  async GET(req: Request) {
+  async GET(req: any) {
     const headers = req.headers;
     const authToken = headers.get("authentication")?.split("Bearer ")[1];
     if (authToken != "LSXRqq") {
@@ -21,7 +21,7 @@ class Transactions {
       headers: config.defaultHeaders,
     });
   }
-  async POST(req: Request) {
+  async POST(req: any) {
     const headers = req.headers;
     const authToken = headers.get("authentication")?.split("Bearer ")[1];
     if (authToken != "LSXRqq") {
