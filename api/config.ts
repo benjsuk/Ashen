@@ -5,7 +5,7 @@ class config {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "authentication, content-type, Ashenuuid",
   };
-  static dateFmt = new Intl.DateTimeFormat("en-GB", {
+  static dateFmt = new Intl.DateTimeFormat("en-CA", {
     timeZone: "Europe/London",
     year: "numeric",
     month: "2-digit",

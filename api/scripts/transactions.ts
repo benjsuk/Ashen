@@ -1,5 +1,6 @@
 import { v7 as uuid, NIL as nil } from "uuid";
 import { callDB } from "./db";
+import { timeUtils } from "./timeUtils";
 
 type Direction = "income" | "expense";
 
@@ -44,12 +45,12 @@ async function getTransactions(user?: string) {
 async function getTransactionsByDay(date: Date, user: string) {
   if (!user) {
     return await callDB("SELECT * FROM transactions WHERE date = ?", [
-      date.toISOString().split("T")[0],
+      timeUtils.dateUK(date),
     ]);
   } else {
     return await callDB(
       "SELECT * FROM transactions WHERE date = ? AND userID = ?",
-      [date.toISOString().split("T")[0], user],
+      [timeUtils.dateUK(date), user],
     );
   }
 }
@@ -57,7 +58,7 @@ async function getTransactionsByDay(date: Date, user: string) {
 async function getTransactionsByDays(from: Date, to: Date, user: string) {
   return await callDB(
     "SELECT * FROM transactions WHERE date BETWEEN ? AND ? AND userID = ?",
-    [from.toISOString().split("T")[0], to.toISOString().split("T")[0], user],
+    [timeUtils.dateUK(from), timeUtils.dateUK(to), user],
   );
 }
 
@@ -74,7 +75,7 @@ async function logTransaction(transaction: Transaction) {
       transaction.id,
       transaction.amount,
       transaction.description,
-      transaction.date.toISOString().split("T")[0],
+      timeUtils.dateUK(transaction.date),
       transaction.category || null,
       transaction.user,
       transaction.direction || "expense",

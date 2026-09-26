@@ -1,4 +1,5 @@
 import { callDB } from "./db";
+import { timeUtils } from "./timeUtils";
 import { getTransactionsByDay, getTransactionsByDays } from "./transactions";
 
 type Day = {
@@ -8,7 +9,7 @@ type Day = {
 
 async function getDay(date: Date, user: string) {
   const day = await callDB("SELECT * FROM days WHERE date = ? AND userID = ?", [
-    date.toISOString().split("T")[0],
+    timeUtils.dateUK(date),
     user,
   ]);
   const transactions = await getTransactionsByDay(date, user);
@@ -24,7 +25,7 @@ async function getDay(date: Date, user: string) {
   }
 
   return {
-    date: date.toISOString().split("T")[0],
+    date: timeUtils.dateUK(date),
     balance: day[0][0]?.balance ?? null,
     income: income,
     expense: expense,
@@ -33,14 +34,14 @@ async function getDay(date: Date, user: string) {
 
 function dayKey(value: unknown): string {
   if (value instanceof Date) {
-    return value.toISOString().slice(0, 10);
+    return timeUtils.dateUK(value);
   }
   return String(value).slice(0, 10);
 }
 
 async function getDays(from: Date, to: Date, user: string) {
-  const fromStr = from.toISOString().split("T")[0];
-  const toStr = to.toISOString().split("T")[0];
+  const fromStr = timeUtils.dateUK(from)
+  const toStr = timeUtils.dateUK(to)
 
   const day = await callDB(
     "SELECT * FROM days WHERE date BETWEEN ? AND ? AND userID = ?",
@@ -73,7 +74,7 @@ async function getDays(from: Date, to: Date, user: string) {
   }
 
   return dates.map((date) => {
-    const key = date.toISOString().slice(0, 10);
+    const key = timeUtils.dateUK(date)
     const dayTotals = totals.get(key);
     return {
       date: key,
@@ -87,7 +88,7 @@ async function getDays(from: Date, to: Date, user: string) {
 async function setDay(date: Date, user: string, balance: number) {
   await callDB(
     "INSERT INTO days (date, userID, balance) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE balance = VALUES(balance)",
-    [date.toISOString().split("T")[0], user, balance],
+    [timeUtils.dateUK(date), user, balance],
   );
 }
 
