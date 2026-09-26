@@ -62,7 +62,7 @@ Every request identified; all data segmented by real users.
 
 - [x] Make all times UK time for consistency
 - [x] Set up Firebase project + initialize `firebase-admin`
-- [ ] Migrate schema: `userID` -> `varchar(128)` (Firebase UID); drop dev-user seed
+- [x] Migrate schema: `userID` -> `varchar(128)` (Firebase UID); drop dev-user seed
 - [ ] Auth middleware, verify bearer ID token -> `uid`
 - [ ] Auto-provision `users` row on first login
 - [ ] Scope all routes by authenticated user
