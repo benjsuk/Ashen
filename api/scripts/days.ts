@@ -40,8 +40,8 @@ function dayKey(value: unknown): string {
 }
 
 async function getDays(from: Date, to: Date, user: string) {
-  const fromStr = timeUtils.dateUK(from)
-  const toStr = timeUtils.dateUK(to)
+  const fromStr = timeUtils.dateUK(from);
+  const toStr = timeUtils.dateUK(to);
 
   const day = await callDB(
     "SELECT * FROM days WHERE date BETWEEN ? AND ? AND userID = ?",
@@ -74,7 +74,7 @@ async function getDays(from: Date, to: Date, user: string) {
   }
 
   return dates.map((date) => {
-    const key = timeUtils.dateUK(date)
+    const key = timeUtils.dateUK(date);
     const dayTotals = totals.get(key);
     return {
       date: key,
