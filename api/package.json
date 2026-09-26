@@ -10,7 +10,7 @@
     "typescript": "latest"
   },
   "scripts": {
-    "start": "bun run --env-file='db_server/.db.env' --env-file='.env' api.ts ",
+    "start": "TZ=Europe/London bun run --env-file='db_server/.db.env' --env-file='.env' api.ts ",
     "client": "bun run --hot ../lightweight-client/index.html",
     "release": "bun run scripts/release.ts"
   },
