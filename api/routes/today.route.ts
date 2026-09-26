@@ -39,6 +39,4 @@ class Today {
   }
 }
 
-
 export const todayRouter = new Today();
-

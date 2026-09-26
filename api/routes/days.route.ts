@@ -27,6 +27,4 @@ class Days {
   }
 }
 
-
 export const daysRouter = new Days();
-

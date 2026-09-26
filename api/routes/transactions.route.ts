@@ -71,6 +71,4 @@ class Transactions {
   }
 }
 
-
 export const transactionsRouter = new Transactions();
-

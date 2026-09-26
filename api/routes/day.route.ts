@@ -56,6 +56,4 @@ class Day {
   }
 }
 
-
 export const dayRouter = new Day();
-

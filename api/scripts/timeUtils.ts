@@ -7,6 +7,4 @@ class TimeUtils {
   }
 }
 
-
-
 export const timeUtils = new TimeUtils();
