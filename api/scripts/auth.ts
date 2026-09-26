@@ -1,4 +1,5 @@
 import { auth } from "./firebase";
+import { userUtils } from "./users";
 
 class AuthUtil {
   async authenticate(req: any) {
@@ -13,6 +14,13 @@ class AuthUtil {
     } catch {
       return null;
     }
+  }
+  async requireUser(req: any): Promise<string | null> {
+    const decoded = await authUtil.authenticate(req);
+    if (!decoded) return null;
+    const uid = decoded.uid;
+    await userUtils.ensureUser(uid, decoded.name ?? null);
+    return uid;
   }
 }
 
