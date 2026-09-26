@@ -1,5 +1,5 @@
 class Firebase {
-  static projectId = "ashen-benjs"
+  static projectId = "ashen-benjs";
 }
 
 class config {
@@ -15,7 +15,7 @@ class config {
     month: "2-digit",
     day: "2-digit",
   });
-  static firebase = Firebase
+  static firebase = Firebase;
 }
 
 export { config };
