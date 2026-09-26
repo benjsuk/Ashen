@@ -4,7 +4,7 @@ import { getDay, setDay } from "../scripts/days";
 import { util } from "../scripts/utils";
 
 class Month {
-  async GET(req: any) {
+  async GET(req: Request) {
     const headers = req.headers;
     const authToken = headers.get("authentication")?.split("Bearer ")[1];
     const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");

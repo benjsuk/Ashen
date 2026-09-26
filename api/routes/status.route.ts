@@ -7,6 +7,6 @@ class Status {
   }
 }
 
-const statusRouter = new Status();
 
-export { statusRouter };
+export const statusRouter = new Status();
+

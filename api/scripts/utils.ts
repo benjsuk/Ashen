@@ -30,6 +30,4 @@ class Utils {
   }
 }
 
-const util = new Utils();
-
-export { util };
+export const util = new Utils();

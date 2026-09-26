@@ -6,7 +6,7 @@ import {
 } from "../scripts/transactions";
 
 class Transactions {
-  async GET(req: any) {
+  async GET(req: Request) {
     const headers = req.headers;
     const authToken = headers.get("authentication")?.split("Bearer ")[1];
     if (authToken != "LSXRqq") {
@@ -21,7 +21,7 @@ class Transactions {
       headers: config.defaultHeaders,
     });
   }
-  async POST(req: any) {
+  async POST(req: Request) {
     const headers = req.headers;
     const authToken = headers.get("authentication")?.split("Bearer ")[1];
     if (authToken != "LSXRqq") {
@@ -71,6 +71,6 @@ class Transactions {
   }
 }
 
-const transactionsRouter = new Transactions();
 
-export { transactionsRouter };
+export const transactionsRouter = new Transactions();
+

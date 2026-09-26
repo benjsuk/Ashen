@@ -7,6 +7,6 @@ class TimeUtils {
   }
 }
 
-const timeUtils = new TimeUtils();
 
-export { timeUtils };
+
+export const timeUtils = new TimeUtils();

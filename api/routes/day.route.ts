@@ -4,7 +4,7 @@ import { getDay, setDay } from "../scripts/days";
 import { util } from "../scripts/utils";
 
 class Day {
-  async GET(req: any) {
+  async GET(req: Request) {
     const headers = req.headers;
     const authToken = headers.get("authentication")?.split("Bearer ")[1];
     const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
@@ -20,7 +20,7 @@ class Day {
       headers: config.defaultHeaders,
     });
   }
-  async POST(req: any) {
+  async POST(req: Request) {
     try {
       const headers = req.headers;
       const authToken = headers.get("authentication")?.split("Bearer ")[1];
@@ -56,6 +56,6 @@ class Day {
   }
 }
 
-const dayRouter = new Day();
 
-export { dayRouter };
+export const dayRouter = new Day();
+

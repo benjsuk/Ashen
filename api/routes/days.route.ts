@@ -3,7 +3,7 @@ import { NIL } from "uuid";
 import { getDays } from "../scripts/days";
 
 class Days {
-  async GET(req: any) {
+  async GET(req: Request) {
     const headers = req.headers;
     const authToken = headers.get("authentication")?.split("Bearer ")[1];
     const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
@@ -27,6 +27,6 @@ class Days {
   }
 }
 
-const daysRouter = new Days();
 
-export { daysRouter };
+export const daysRouter = new Days();
+

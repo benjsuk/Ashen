@@ -4,7 +4,7 @@ import { getTransactionsByDay } from "../scripts/transactions";
 import { NIL } from "uuid";
 
 class Today {
-  async GET(req: any) {
+  async GET(req: Request) {
     const headers = req.headers;
     const authToken = headers.get("authentication")?.split("Bearer ")[1];
     const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
@@ -39,6 +39,6 @@ class Today {
   }
 }
 
-const todayRouter = new Today();
 
-export { todayRouter };
+export const todayRouter = new Today();
+
