@@ -1,9 +1,7 @@
 class TimeUtils {
-    dateUK(){
-        
-    }
+  dateUK() {}
 }
 
 const timeUtils = new TimeUtils();
 
-export {timeUtils}
+export { timeUtils };

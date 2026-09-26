@@ -6,9 +6,11 @@ class config {
     "Access-Control-Allow-Headers": "authentication, content-type, Ashenuuid",
   };
   static dateFmt = new Intl.DateTimeFormat("en-GB", {
-  timeZone: "Europe/London",
-  year: "numeric", month: "2-digit", day: "2-digit",
-});
+    timeZone: "Europe/London",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
 }
 
 export { config };
