@@ -7,11 +7,14 @@ class Days {
   async GET(req: any) {
     const headers = req.headers;
     const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
-   const decoded = await authUtil.authenticate(req);
-if (!decoded) {
-  return new Response(null, { status: 401, headers: config.defaultHeaders });
-}
-const uid = decoded.uid;
+    const decoded = await authUtil.authenticate(req);
+    if (!decoded) {
+      return new Response(null, {
+        status: 401,
+        headers: config.defaultHeaders,
+      });
+    }
+    const uid = decoded.uid;
     var from = new Date(req.params.from);
     var to = new Date(req.params.to);
     if (isNaN(from.getTime()) || isNaN(to.getTime()))

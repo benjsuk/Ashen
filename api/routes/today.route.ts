@@ -9,11 +9,14 @@ class Today {
     const headers = req.headers;
     const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
     util.debug(Ashenuuid);
-const decoded = await authUtil.authenticate(req);
-if (!decoded) {
-  return new Response(null, { status: 401, headers: config.defaultHeaders });
-}
-const uid = decoded.uid;
+    const decoded = await authUtil.authenticate(req);
+    if (!decoded) {
+      return new Response(null, {
+        status: 401,
+        headers: config.defaultHeaders,
+      });
+    }
+    const uid = decoded.uid;
     var total = 0;
     const dbResult =
       (await getTransactionsByDay(new Date(), Ashenuuid))[0] || "NONE";

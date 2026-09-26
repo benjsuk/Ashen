@@ -8,22 +8,28 @@ import {
 
 class Transactions {
   async GET(req: any) {
-  const decoded = await authUtil.authenticate(req);
-if (!decoded) {
-  return new Response(null, { status: 401, headers: config.defaultHeaders });
-}
-const uid = decoded.uid;
+    const decoded = await authUtil.authenticate(req);
+    if (!decoded) {
+      return new Response(null, {
+        status: 401,
+        headers: config.defaultHeaders,
+      });
+    }
+    const uid = decoded.uid;
     const dbResult = (await getTransactions()) || "NONE";
     return Response.json(JSON.parse(JSON.stringify(dbResult[0])), {
       headers: config.defaultHeaders,
     });
   }
   async POST(req: any) {
-const decoded = await authUtil.authenticate(req);
-if (!decoded) {
-  return new Response(null, { status: 401, headers: config.defaultHeaders });
-}
-const uid = decoded.uid;
+    const decoded = await authUtil.authenticate(req);
+    if (!decoded) {
+      return new Response(null, {
+        status: 401,
+        headers: config.defaultHeaders,
+      });
+    }
+    const uid = decoded.uid;
     try {
       let request: any = await req.json();
       request = JSON.parse(JSON.stringify(request));

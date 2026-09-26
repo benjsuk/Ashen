@@ -9,10 +9,13 @@ class Day {
     const headers = req.headers;
     const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
     const decoded = await authUtil.authenticate(req);
-if (!decoded) {
-  return new Response(null, { status: 401, headers: config.defaultHeaders });
-}
-const uid = decoded.uid;
+    if (!decoded) {
+      return new Response(null, {
+        status: 401,
+        headers: config.defaultHeaders,
+      });
+    }
+    const uid = decoded.uid;
     const result = await getDay(new Date(req.params.day), Ashenuuid);
     return Response.json(result, {
       headers: config.defaultHeaders,
@@ -22,11 +25,14 @@ const uid = decoded.uid;
     try {
       const headers = req.headers;
       const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
- const decoded = await authUtil.authenticate(req);
-if (!decoded) {
-  return new Response(null, { status: 401, headers: config.defaultHeaders });
-}
-const uid = decoded.uid;
+      const decoded = await authUtil.authenticate(req);
+      if (!decoded) {
+        return new Response(null, {
+          status: 401,
+          headers: config.defaultHeaders,
+        });
+      }
+      const uid = decoded.uid;
       const day = new Date(req.params.day);
       if (!Number.isInteger(req.body.balance)) {
         throw "Validation";
