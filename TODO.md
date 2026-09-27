@@ -56,7 +56,7 @@ Answer "how much did I spend when?", per user, by day, month, or transaction.
 - [x] Re-arrange files to be a bit more clean.
 - [x] Release: changelog + tag `v0.2.0`
 
-## M4 - Authentication (Firebase) - > `0.3.0-proactive`
+## M4 - Authentication (Firebase) - > `0.3.0`
 
 Every request identified; all data segmented by real users.
 
@@ -67,6 +67,13 @@ Every request identified; all data segmented by real users.
 - [x] Auto-provision `users` row on first login
 - [x] Scope all routes by authenticated user
 - [x] Local dev via Firebase Auth Emulator
+
+## M4.5 - Web Client Start - > `0.3.0` (no changes to API, version doesn't change)
+
+- [ ] Simple data pulling / pushing to live API
+- [ ] Simple login
+- [ ] Google Auth Set-up
+
 
 ## M5 - Budget
 
@@ -94,6 +101,5 @@ Every request identified; all data segmented by real users.
 
 ## Far future, platforms (split these out when you get there)
 
-- [ ] Web client
 - [ ] Windows client
 - [ ] iOS client (`Ashen-iOS` submodule)

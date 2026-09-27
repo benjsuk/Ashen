@@ -39,3 +39,5 @@ db_server/db_data/
 db_server/*.env
 
 firebase-service-account.json
+
+firebase.config.ts
