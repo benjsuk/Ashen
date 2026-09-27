@@ -66,8 +66,7 @@ Every request identified; all data segmented by real users.
 - [x] Auth middleware, verify bearer ID token -> `uid`
 - [x] Auto-provision `users` row on first login
 - [x] Scope all routes by authenticated user
-- [ ] Local dev via Firebase Auth Emulator
-- [ ] Standardise most exports as class.function - even if it means renaming variables to favour export names
+- [x] Local dev via Firebase Auth Emulator
 
 ## M5 - Budget
 
