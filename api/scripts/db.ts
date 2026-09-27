@@ -6,11 +6,11 @@ const mysql = new SQL({
 });
 
 async function startDB() {
-  await $`cd db_server/ && sudo docker compose up -d --wait`.quiet();
+  await $`cd db_server/ && docker compose up -d --wait`.quiet();
 }
 
 async function stopDB() {
-  await $`cd db_server/ && sudo docker compose down`.quiet();
+  await $`cd db_server/ && docker compose down`.quiet();
 }
 
 async function resetDB() {
