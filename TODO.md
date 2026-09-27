@@ -74,7 +74,6 @@ Every request identified; all data segmented by real users.
 - [ ] Simple login
 - [ ] Google Auth Set-up
 
-
 ## M5 - Budget
 
 - [ ] Budget schema (per-user, per-category, per-month limits)
