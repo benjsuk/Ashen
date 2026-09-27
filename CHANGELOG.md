@@ -4,6 +4,7 @@
 > Changelog refers to last released version, not last commit. Check tags.
 
 ### Added
+
 - Added Firebase support with emulation
 
 ## [0.2.2] - 2026-09-25
