@@ -1,4 +1,4 @@
-import { v7 as uuid, NIL as nil } from "uuid";
+import { v7 as uuid } from "uuid";
 import { callDB } from "./db";
 import { timeUtils } from "./timeUtils";
 
@@ -9,20 +9,19 @@ type Transaction = {
   amount: number;
   description: string;
   date: Date;
-  category?: string;
+  category: string;
   user: string;
-  direction?: Direction;
+  direction: Direction;
 };
 
 function newTransaction(
   amount: number,
   description: string,
   date: Date,
-  category?: string,
-  user?: string,
-  direction?: Direction,
+  category: string,
+  user: string,
+  direction: Direction,
 ) {
-  if (!user) user = nil;
   return <Transaction>{
     id: uuid(),
     amount,
@@ -34,25 +33,19 @@ function newTransaction(
   };
 }
 
-async function getTransactions(user?: string) {
-  if (!user) {
-    return await callDB("SELECT * FROM transactions");
-  } else {
+async function getTransactions(user: string) {
+
     return await callDB("SELECT * FROM transactions WHERE userID = ?", [user]);
-  }
+  
 }
 
 async function getTransactionsByDay(date: Date, user: string) {
-  if (!user) {
-    return await callDB("SELECT * FROM transactions WHERE date = ?", [
-      timeUtils.dateUK(date),
-    ]);
-  } else {
+
     return await callDB(
       "SELECT * FROM transactions WHERE date = ? AND userID = ?",
       [timeUtils.dateUK(date), user],
     );
-  }
+  
 }
 
 async function getTransactionsByDays(from: Date, to: Date, user: string) {
@@ -62,9 +55,10 @@ async function getTransactionsByDays(from: Date, to: Date, user: string) {
   );
 }
 
-async function getTransaction(id: string) {
-  return await callDB("SELECT * FROM transactions WHERE transactionID = ?", [
+async function getTransaction(id: string, user:string) {
+  return await callDB("SELECT * FROM transactions WHERE transactionID = ? AND userID = ?", [
     id,
+    user
   ]);
 }
 

@@ -64,8 +64,8 @@ Every request identified; all data segmented by real users.
 - [x] Set up Firebase project + initialize `firebase-admin`
 - [x] Migrate schema: `userID` -> `varchar(128)` (Firebase UID); drop dev-user seed
 - [x] Auth middleware, verify bearer ID token -> `uid`
-- [ ] Auto-provision `users` row on first login
-- [ ] Scope all routes by authenticated user
+- [x] Auto-provision `users` row on first login
+- [x] Scope all routes by authenticated user
 - [ ] Local dev via Firebase Auth Emulator
 - [ ] Standardise most exports as class.function - even if it means renaming variables to favour export names
 

@@ -1,25 +1,19 @@
-import { util } from "../scripts/utils";
 import { config } from "../config";
 import { getTransactionsByDay } from "../scripts/transactions";
-import { NIL } from "uuid";
 import { authUtil } from "../scripts/auth";
 
 class Today {
-  async GET(req: any) {
-    const headers = req.headers;
-    const Ashenuuid = headers.get("Ashenuuid") || NIL.replace("0", "1");
-    util.debug(Ashenuuid);
-    const decoded = await authUtil.authenticate(req);
-    if (!decoded) {
+  async GET(req: any) { 
+    const uid = await authUtil.requireUser(req);
+    if (!uid) {
       return new Response(null, {
         status: 401,
         headers: config.defaultHeaders,
       });
     }
-    const uid = decoded.uid;
     var total = 0;
     const dbResult =
-      (await getTransactionsByDay(new Date(), Ashenuuid))[0] || "NONE";
+      (await getTransactionsByDay(new Date(), uid))[0] || "NONE";
     if (dbResult.length > 0) {
       for (let i = 0; i < dbResult.length; i++) {
         if (dbResult[i].direction == "income") {
