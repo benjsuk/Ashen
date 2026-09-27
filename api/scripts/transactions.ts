@@ -34,18 +34,14 @@ function newTransaction(
 }
 
 async function getTransactions(user: string) {
-
-    return await callDB("SELECT * FROM transactions WHERE userID = ?", [user]);
-  
+  return await callDB("SELECT * FROM transactions WHERE userID = ?", [user]);
 }
 
 async function getTransactionsByDay(date: Date, user: string) {
-
-    return await callDB(
-      "SELECT * FROM transactions WHERE date = ? AND userID = ?",
-      [timeUtils.dateUK(date), user],
-    );
-  
+  return await callDB(
+    "SELECT * FROM transactions WHERE date = ? AND userID = ?",
+    [timeUtils.dateUK(date), user],
+  );
 }
 
 async function getTransactionsByDays(from: Date, to: Date, user: string) {
@@ -55,11 +51,11 @@ async function getTransactionsByDays(from: Date, to: Date, user: string) {
   );
 }
 
-async function getTransaction(id: string, user:string) {
-  return await callDB("SELECT * FROM transactions WHERE transactionID = ? AND userID = ?", [
-    id,
-    user
-  ]);
+async function getTransaction(id: string, user: string) {
+  return await callDB(
+    "SELECT * FROM transactions WHERE transactionID = ? AND userID = ?",
+    [id, user],
+  );
 }
 
 async function logTransaction(transaction: Transaction) {
