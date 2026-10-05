@@ -21,9 +21,10 @@ function newTransaction(
   category: string,
   user: string,
   direction: Direction,
+  id?: any,
 ) {
   return <Transaction>{
-    id: uuid(),
+    id: id || uuid(),
     amount,
     description,
     date,
@@ -60,7 +61,15 @@ async function getTransaction(id: string, user: string) {
 
 async function logTransaction(transaction: Transaction) {
   await callDB(
-    "INSERT INTO transactions (transactionID, amount, description, date, category, userID, direction) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    `INSERT INTO transactions (transactionID, amount, description, date, category, userID, direction)
+     VALUES (?, ?, ?, ?, ?, ?, ?) AS new
+     ON DUPLICATE KEY UPDATE
+     amount      = new.amount,
+     description = new.description,
+     date        = new.date,
+     category    = new.category,
+     userID      = new.userID,
+     direction   = new.direction`,
     [
       transaction.id,
       transaction.amount,
@@ -73,6 +82,13 @@ async function logTransaction(transaction: Transaction) {
   );
 }
 
+async function deleteTransaction(id: string, user: string) {
+  await callDB(
+    `DELETE FROM transactions WHERE transactionID = ? AND userID = ?`,
+    [id, user],
+  );
+}
+
 export type { Transaction };
 export {
   getTransactions,
@@ -81,4 +97,5 @@ export {
   getTransaction,
   getTransactionsByDay,
   getTransactionsByDays,
+  deleteTransaction
 };

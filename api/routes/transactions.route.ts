@@ -1,6 +1,7 @@
 import { config } from "../config";
 import { authUtil } from "../scripts/auth";
 import {
+  deleteTransaction,
   getTransactions,
   logTransaction,
   newTransaction,
@@ -31,6 +32,15 @@ class Transactions {
     try {
       let request: any = await req.json();
       request = JSON.parse(JSON.stringify(request));
+
+      if (request.delete && request.id) {
+        await deleteTransaction(request.id, uid);
+        return new Response("Completed", {
+          status: 201,
+          headers: config.defaultHeaders,
+        });
+      }
+
       if (
         !request.amount ||
         !request.description ||
@@ -54,6 +64,7 @@ class Transactions {
         request.category || null,
         uid,
         request.direction || null,
+        request.id || null,
       );
       await logTransaction(inTransaction);
     } catch (e) {
