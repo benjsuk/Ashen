@@ -97,5 +97,5 @@ export {
   getTransaction,
   getTransactionsByDay,
   getTransactionsByDays,
-  deleteTransaction
+  deleteTransaction,
 };
