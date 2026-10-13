@@ -5,14 +5,14 @@ CREATE TABLE users(
 CREATE TABLE days(
     date DATE NOT NULL,
     userID varchar(128) NOT NULL,
-    balance INT NOT NULL,
+    balance BIGINT NOT NULL,
     PRIMARY KEY (date, userID),
     CONSTRAINT fk_days_user
         FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
 );
 CREATE TABLE transactions(
     transactionID varchar(36) PRIMARY KEY,
-    amount INT NOT NULL,
+    amount BIGINT NOT NULL,
     description varchar(255) NOT NULL,
     date DATE NOT NULL,
     category varchar(128),
